@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum TitleButtonType
+{
+    Start, HowToPlay, Setting, Credit, Exit
+}
+
 public class TitleButton : MonoBehaviour
 {
+    [SerializeField] private TitleButtonType type;
+
     [SerializeField] private Image leftFill;
     [SerializeField] private Image rightFill;
 
@@ -33,6 +41,17 @@ public class TitleButton : MonoBehaviour
         {
             SetRightFill(0);
         }
+
+        if (leftFill.fillAmount >= 0.99f && rightFill.fillAmount >= 0.99f)
+        {
+            onLeftPlayer = false;
+            onRightPlayer = false;
+            TitleManager.Instance.ButtonEvent(type, true);
+        }
+        else
+        {
+            
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -51,10 +70,12 @@ public class TitleButton : MonoBehaviour
     {
         if (collision.GetComponent<TitlePlayer>()?.GetLeftPosition() == true)
         {
+            TitleManager.Instance.ButtonEvent(type, false);
             onLeftPlayer = false;
         }
         else
         {
+            TitleManager.Instance.ButtonEvent(type, false);
             onRightPlayer = false;
         }
     }
