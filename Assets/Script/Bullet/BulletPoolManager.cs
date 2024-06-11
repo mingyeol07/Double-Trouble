@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class BulletPoolManager : MonoBehaviour
 {
@@ -9,22 +10,18 @@ public class BulletPoolManager : MonoBehaviour
     [SerializeField] private List<BulletData> bulletDatas = new();
 
     private Dictionary<BulletType, GameObject> bulletPrefabDict;
-    private Dictionary<GameObject, Stack<GameObject>> stackDict;
+    private Dictionary<BulletType, Stack<GameObject>> stackDict;
 
     private void Awake()
     {
         Instance = this;
-    }
-
-    private void Start()
-    {
         Initialization();
     }
 
     private void Initialization()
     {
         bulletPrefabDict = new Dictionary<BulletType, GameObject>(); // 딕셔너리 초기화
-        stackDict = new Dictionary<GameObject, Stack<GameObject>>(); // 딕셔너리 초기화
+        stackDict = new Dictionary<BulletType, Stack<GameObject>>(); // 딕셔너리 초기화
 
         int bulletCount = bulletDatas.Count;
 
@@ -32,14 +29,14 @@ public class BulletPoolManager : MonoBehaviour
         {
             BulletData bulletData = bulletDatas[i];
             bulletPrefabDict[bulletData.type] = bulletData.prefab;
-            stackDict[bulletData.prefab] = new Stack<GameObject>(); // 수정된 부분
+            stackDict[bulletData.type] = new Stack<GameObject>(); // 수정된 부분
 
             for (int j = 0; j < 200; j++)
             {
                 GameObject bullet = Instantiate(bulletData.prefab);
                 bullet.SetActive(false);
                 bullet.transform.parent = transform;
-                stackDict[bulletData.prefab].Push(bullet); // 수정된 부분
+                stackDict[bulletData.type].Push(bullet); // 수정된 부분
             }
         }
     }
@@ -47,18 +44,18 @@ public class BulletPoolManager : MonoBehaviour
     private GameObject InstantiatePrefab(BulletType bulletType)
     {
         GameObject bullet = Instantiate(bulletPrefabDict[bulletType]);
-        stackDict[bulletPrefabDict[bulletType]].Push(bullet);
-        bullet.transform.parent = transform;
+        stackDict[bulletType].Push(bullet);
+
         return bullet;
     }
 
-    public GameObject Spawn(BulletType bulletType, Transform parent)
+    public GameObject Spawn(BulletType bulletType, Vector2 spawnPoint, float angle)
     {
         GameObject bullet = null;
 
-        if (stackDict[bulletPrefabDict[bulletType]].Count > 0)
+        if (stackDict[bulletType].Count > 0)
         {
-            bullet = stackDict[bulletPrefabDict[bulletType]].Pop();
+            bullet = stackDict[bulletType].Pop();
         }
         else
         {
@@ -66,7 +63,8 @@ public class BulletPoolManager : MonoBehaviour
         }
 
         bullet.SetActive(true);
-        //bullet.transform.parent = parent;
+        bullet.transform.position = spawnPoint;
+        bullet.transform.rotation = Quaternion.AngleAxis(angle +90, Vector3.forward);
 
         return bullet;
     }
@@ -74,7 +72,6 @@ public class BulletPoolManager : MonoBehaviour
     public void DeSpawn(BulletType bulletType, GameObject bullet)
     {
         bullet.SetActive(false);
-        bullet.transform.parent = transform;
-        stackDict[bulletPrefabDict[bulletType]].Push(bullet);
+        stackDict[bulletType].Push(bullet);
     }
 }

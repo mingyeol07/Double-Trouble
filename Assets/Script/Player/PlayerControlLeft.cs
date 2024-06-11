@@ -33,6 +33,6 @@ public class PlayerControlLeft : Player
 
     protected override void GameOver()
     {
-        base.GameOver();
+
     }
 }

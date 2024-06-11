@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControlRight : Player
+public class UnionPlayer : Player
 {
     [SerializeField] private float moveSpeed;
+    [SerializeField] private float unionTime;
     private Rigidbody2D rigid;
 
     private void Awake()
@@ -15,6 +16,7 @@ public class PlayerControlRight : Player
     protected override void Start()
     {
         base.Start();
+        StartCoroutine(Co_StartUnionTime());
     }
 
     protected override void Update()
@@ -25,8 +27,8 @@ public class PlayerControlRight : Player
 
     private void MoveInput()
     {
-        float h = Input.GetAxisRaw("HorizontalArrow");
-        float v = Input.GetAxisRaw("VerticalArrow");
+        float h = Input.GetAxisRaw("HorizontalMultiple");
+        float v = Input.GetAxisRaw("VerticalMultiple");
 
         rigid.velocity = new Vector2(h, v).normalized * moveSpeed;
     }
@@ -36,5 +38,11 @@ public class PlayerControlRight : Player
         
     }
 
-    
+    private IEnumerator Co_StartUnionTime()
+    {
+        PlayerManager.Instance.SetActivePlayers(false);
+        yield return new WaitForSeconds(unionTime);
+        PlayerManager.Instance.SetActivePlayers(true);
+        gameObject.SetActive(false);
+    }
 }

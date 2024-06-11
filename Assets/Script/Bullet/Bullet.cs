@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
 
     [SerializeField] private int damage;
     [SerializeField] private float moveSpeed;
+    [SerializeField] private float destroyWaitTime;
 
     private Rigidbody2D rigid;
 
@@ -18,7 +19,7 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        rigid.velocity = Vector2.up * moveSpeed;
+        rigid.velocity = transform.up * moveSpeed;
     }
 
     public int GetDamage()
@@ -46,7 +47,7 @@ public class Bullet : MonoBehaviour
 
     private IEnumerator DistroyDelay()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(destroyWaitTime);
         Destroy();
     }
 }

@@ -102,6 +102,7 @@ MonoBehaviour:
   type: 0
   damage: 1
   moveSpeed: 5
+  destroyWaitTime: 5
 --- !u!50 &8890312319421558009
 Rigidbody2D:
   serializedVersion: 4
