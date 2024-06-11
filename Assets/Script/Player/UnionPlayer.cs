@@ -40,7 +40,6 @@ public class UnionPlayer : Player
 
     private IEnumerator Co_StartUnionTime()
     {
-        PlayerManager.Instance.SetActivePlayers(false);
         yield return new WaitForSeconds(unionTime);
         PlayerManager.Instance.SetActivePlayers(true);
         gameObject.SetActive(false);

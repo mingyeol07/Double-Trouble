@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Player : MonoBehaviour
 {
@@ -11,6 +11,11 @@ public abstract class Player : MonoBehaviour
     [SerializeField] private Transform shootPositionRight;
 
     [SerializeField] private float shootDelayTime;
+
+    [SerializeField] private Image unionWaitTimeGauge;
+    private float unionTimer = 0;
+    private const float unionDuration = 3.0f;
+    private bool unionSet;
 
     private BulletType bulletType;
 
@@ -32,18 +37,42 @@ public abstract class Player : MonoBehaviour
         {
             HpDown();
         }
-        else if (collision.gameObject.CompareTag("PowerUp"))
-        {
-            
-        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            
+            if(unionTimer <= unionDuration && !unionSet)
+            {
+                unionTimer += Time.deltaTime;
+                unionWaitTimeGauge.fillAmount = Mathf.Lerp(0, 1, unionTimer / unionDuration);
+
+                if(unionTimer >= unionDuration)
+                {
+                    unionTimer = unionDuration;
+                    SetAbleUnion();
+                    unionSet = true;
+                }
+            }
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (unionTimer > 0)
+            {
+                unionWaitTimeGauge.fillAmount = Mathf.Lerp(1, 0, 0.5f);
+                unionSet = false;
+            }
+        }
+    }
+
+    protected virtual void SetAbleUnion()
+    {
+
     }
 
     private IEnumerator ShootDelay()
@@ -57,11 +86,6 @@ public abstract class Player : MonoBehaviour
     {
         BulletPoolManager.Instance.Spawn(bulletType, shootPositionLeft.position, -90);
         BulletPoolManager.Instance.Spawn(bulletType, shootPositionRight.position, -90);
-    }
-
-    private void ShootPowerUpBullet()
-    {
-        bulletType = BulletType.PowerUpBullet;
     }
 
     private void HpDown()

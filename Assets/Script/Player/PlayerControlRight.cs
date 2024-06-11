@@ -36,5 +36,8 @@ public class PlayerControlRight : Player
         
     }
 
-    
+    protected override void SetAbleUnion()
+    {
+        PlayerManager.Instance.SetLeftPlayerAbleUnion(true);
+    }
 }
