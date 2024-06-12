@@ -1,4 +1,7 @@
 using System.Collections;
+using System.Xml;
+using Unity.VisualScripting;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +19,7 @@ public abstract class Player : MonoBehaviour
     private float unionTimer = 0;
     private const float unionDuration = 3.0f;
     private bool unionSet;
+    private bool onStayPlayer;
 
     private BulletType bulletType;
 
@@ -28,7 +32,32 @@ public abstract class Player : MonoBehaviour
 
     protected virtual void Update()
     {
+        if(onStayPlayer)
+        {
+            if (unionTimer <= unionDuration && !unionSet)
+            {
+                unionTimer += Time.deltaTime;
+                unionWaitTimeGauge.fillAmount = Mathf.Lerp(0, 1, unionTimer / unionDuration);
 
+                if (unionTimer >= unionDuration)
+                {
+                    unionTimer = unionDuration;
+                    SetAbleUnion();
+                    unionSet = true;
+                }
+            }
+        }
+        else
+        {
+            unionSet = false;
+
+            if(unionTimer > 0)
+            {
+                unionTimer -= Time.deltaTime * 5;
+                unionWaitTimeGauge.fillAmount = Mathf.Lerp(0, 1, (unionTimer / unionDuration)); ;
+            }
+        }
+      
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -37,24 +66,10 @@ public abstract class Player : MonoBehaviour
         {
             HpDown();
         }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
+        
+        if(collision.gameObject.CompareTag("Player"))
         {
-            if(unionTimer <= unionDuration && !unionSet)
-            {
-                unionTimer += Time.deltaTime;
-                unionWaitTimeGauge.fillAmount = Mathf.Lerp(0, 1, unionTimer / unionDuration);
-
-                if(unionTimer >= unionDuration)
-                {
-                    unionTimer = unionDuration;
-                    SetAbleUnion();
-                    unionSet = true;
-                }
-            }
+            onStayPlayer = true;
         }
     }
 
@@ -62,11 +77,7 @@ public abstract class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (unionTimer > 0)
-            {
-                unionWaitTimeGauge.fillAmount = Mathf.Lerp(1, 0, 0.5f);
-                unionSet = false;
-            }
+            onStayPlayer = false;
         }
     }
 
