@@ -13,7 +13,7 @@ public class PlayerManager : MonoBehaviour
     private bool player_left_AbleUnion;
     private bool player_right_AbleUnion;
 
-    [SerializeField] private UnionPlayer player_union; 
+    [SerializeField] private GameObject[] player_union; 
 
     private void Awake()
     {
@@ -59,7 +59,9 @@ public class PlayerManager : MonoBehaviour
         player_right_AbleUnion = false;
 
         SetActivePlayers(false);
-        player_union.gameObject.SetActive(true);
+        int randomIndex = Random.Range(0, 4);
+        GameObject unionPlayer = Instantiate(player_union[randomIndex]);
+        unionPlayer.transform.position = player_L_Transform.position;
     }
 
     public void SetLeftPlayerAbleUnion(bool isAble)
