@@ -30,14 +30,4 @@ public class PlayerControlRight : Player
 
         rigid.velocity = new Vector2(h, v).normalized * moveSpeed;
     }
-
-    protected override void GameOver()
-    {
-        
-    }
-
-    protected override void SetAbleUnion()
-    {
-        PlayerManager.Instance.SetLeftPlayerAbleUnion(true);
-    }
 }

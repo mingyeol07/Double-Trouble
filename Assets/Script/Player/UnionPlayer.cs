@@ -16,7 +16,6 @@ public class UnionPlayer : Player
     protected override void Start()
     {
         base.Start();
-        StartCoroutine(Co_StartUnionTime());
     }
 
     protected override void Update()
@@ -43,5 +42,11 @@ public class UnionPlayer : Player
         yield return new WaitForSeconds(unionTime);
         PlayerManager.Instance.SetActivePlayers(true);
         gameObject.SetActive(false);
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        StartCoroutine(Co_StartUnionTime());
     }
 }

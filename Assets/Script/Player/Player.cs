@@ -5,7 +5,7 @@ using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class Player : MonoBehaviour
+public class Player : MonoBehaviour
 {
     [SerializeField] private int maxHp;
     [SerializeField] private int curHp;
@@ -14,50 +14,18 @@ public abstract class Player : MonoBehaviour
     [SerializeField] private Transform shootPositionRight;
 
     [SerializeField] private float shootDelayTime;
-
-    [SerializeField] private Image unionWaitTimeGauge;
-    private float unionTimer = 0;
-    private const float unionDuration = 3.0f;
-    private bool unionSet;
-    private bool onStayPlayer;
-
     private BulletType bulletType;
 
     protected virtual void Start()
     {
         curHp = maxHp;
         bulletType = BulletType.Bullet;
-        StartCoroutine(ShootDelay());
+       
     }
 
     protected virtual void Update()
     {
-        if(onStayPlayer)
-        {
-            if (unionTimer <= unionDuration && !unionSet)
-            {
-                unionTimer += Time.deltaTime;
-                unionWaitTimeGauge.fillAmount = Mathf.Lerp(0, 1, unionTimer / unionDuration);
 
-                if (unionTimer >= unionDuration)
-                {
-                    unionTimer = unionDuration;
-                    SetAbleUnion();
-                    unionSet = true;
-                }
-            }
-        }
-        else
-        {
-            unionSet = false;
-
-            if(unionTimer > 0)
-            {
-                unionTimer -= Time.deltaTime * 5;
-                unionWaitTimeGauge.fillAmount = Mathf.Lerp(0, 1, (unionTimer / unionDuration)); ;
-            }
-        }
-      
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -66,24 +34,6 @@ public abstract class Player : MonoBehaviour
         {
             HpDown();
         }
-        
-        if(collision.gameObject.CompareTag("Player"))
-        {
-            onStayPlayer = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            onStayPlayer = false;
-        }
-    }
-
-    protected virtual void SetAbleUnion()
-    {
-
     }
 
     private IEnumerator ShootDelay()
@@ -108,5 +58,13 @@ public abstract class Player : MonoBehaviour
         }
     }
 
-    protected abstract void GameOver();
+    protected virtual void GameOver()
+    {
+
+    }
+
+    protected virtual void OnEnable()
+    {
+        StartCoroutine(ShootDelay());
+    }
 }
