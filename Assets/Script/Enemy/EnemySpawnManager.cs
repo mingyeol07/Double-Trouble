@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour
 {
-    private IEnumerator moveEnemy(Vector2 startPosition, Vector2 endPosition, float durationTime)
+
+
+    private void EnemySpawn(EnemyType enemyType, float moveTime, Vector2 startPosition, Vector2 endPosition)
     {
-        float time = 0;
-        while (time < durationTime)
-        {
-            time += Time.deltaTime;
-            transform.position = Vector2.Lerp(startPosition, endPosition, time/ durationTime);
-            yield return null;
-        }
+        GameObject enemy = EnemyPoolManager.Instance.Spawn(enemyType);
+        enemy.GetComponent<Enemy>().StartMove(moveTime, startPosition, endPosition);
+        StartCoroutine(StartShoot(moveTime, enemy.GetComponent<Enemy>()));
+    }
+
+    private IEnumerator StartShoot(float waitTime, Enemy enemy)
+    {
+        yield return new WaitForSeconds(waitTime);
+        enemy.StartShoot();
     }
 }

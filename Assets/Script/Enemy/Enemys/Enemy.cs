@@ -16,6 +16,16 @@ public abstract class Enemy : MonoBehaviour
         StartCoroutine(Co_Shoot());
     }
 
+    public void StartMove(float moveTime, Vector2 startPosition, Vector2 endPosition)
+    {
+        StartCoroutine(Co_StartMove(moveTime, startPosition, endPosition));
+    }
+
+    public void StartShoot()
+    {
+        StartCoroutine(Co_Shoot());
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Bullet"))
@@ -41,21 +51,19 @@ public abstract class Enemy : MonoBehaviour
     /// <param name="moveTime"></param>
     /// <param name="targetTransform"></param>
     /// <returns></returns>
-    public IEnumerator Co_StartMove(float moveTime, Transform targetTransform)
+    private IEnumerator Co_StartMove(float moveTime, Vector2 startPosition, Vector2 endPosition)
     {
         float time = 0;
-        Vector2 startPosition = transform.position;
+        transform.position = startPosition;
         while (time < moveTime)
         {
             float t = time / moveTime;
-            transform.position = Vector2.Lerp(startPosition, targetTransform.position, t);
+            transform.position = Vector2.Lerp(startPosition, endPosition, t);
             time += Time.deltaTime;
 
             yield return null;
         }
-        transform.position = targetTransform.position;
-
-        StartCoroutine(Co_Shoot());
+        transform.position = endPosition;
     }
 
     protected abstract void Shoot();
@@ -65,5 +73,10 @@ public abstract class Enemy : MonoBehaviour
         Shoot();
         yield return new WaitForSeconds(shootCoolTime);
         StartCoroutine(Co_Shoot());
+    }
+
+    private void OnEnable()
+    {
+        curHp = maxHp;
     }
 }
