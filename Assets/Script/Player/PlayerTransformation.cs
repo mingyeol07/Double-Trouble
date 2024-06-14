@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class PlayerTransformation : MonoBehaviour
 {
-    [SerializeField] private Image unionWaitTimeGauge;
+    [SerializeField] private SpriteRenderer playerSpriteRenderer;
     [SerializeField] private bool isLeft;
     private float unionTimer = 0;
     private const float unionDuration = 3.0f;
@@ -22,25 +22,15 @@ public class PlayerTransformation : MonoBehaviour
             if (unionTimer <= unionDuration && !unionSet)
             {
                 unionTimer += Time.deltaTime;
-                unionWaitTimeGauge.fillAmount = Mathf.Lerp(0, 1, unionTimer / unionDuration);
+                playerSpriteRenderer.color = Color.Lerp(playerSpriteRenderer.color, new Color(0, 0, 0, 1), unionTimer / unionDuration);
 
                 if (unionTimer >= unionDuration)
                 {
                     unionTimer = 0;
-                    unionWaitTimeGauge.fillAmount = unionTimer;
+                    playerSpriteRenderer.color = new Color(1, 1, 1, 1);
                     SetAbleUnion();
                     unionSet = true;
                 }
-            }
-        }
-        else
-        {
-            unionSet = false;
-
-            if (unionTimer > 0)
-            {
-                unionTimer -= Time.deltaTime * 5;
-                unionWaitTimeGauge.fillAmount = Mathf.Lerp(0, 1, (unionTimer / unionDuration)); ;
             }
         }
     }
@@ -58,6 +48,8 @@ public class PlayerTransformation : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             onStayPlayer = false;
+            unionTimer = 0;
+            playerSpriteRenderer.color = new Color(1, 1, 1, 1);
         }
     }
 
