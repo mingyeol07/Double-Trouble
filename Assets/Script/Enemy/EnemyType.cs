@@ -1,4 +1,4 @@
 public enum EnemyType
 {
-    EnemyA, EnemyB, EnemyC, EnemyD,
+    EnemyA, EnemyB, EnemyC, EnemyD, EnemyBossA
 }

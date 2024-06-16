@@ -64,6 +64,7 @@ public class BulletPoolManager : MonoBehaviour
 
         bullet.SetActive(true);
         bullet.transform.position = spawnPoint;
+        bullet.transform.parent = transform;
         bullet.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         return bullet;

@@ -32,10 +32,10 @@ public class EnemyC : Enemy
     protected override void Shot()
     {
         beam.SetActive(true);
-        StartCoroutine(BeamAnim());
+        StartCoroutine(Co_BeamAnim());
     }
 
-    private IEnumerator BeamAnim()
+    private IEnumerator Co_BeamAnim()
     {
         // 조준하는시간 2
         for (int i = 0; i < beamSpriteRenderer.Length; i++)

@@ -22,10 +22,10 @@ public class EnemyA : Enemy
 
     protected override void Shot()
     {
-        StartCoroutine(DoubleShot());
+        StartCoroutine(Co_DoubleShot());
     }
 
-    private IEnumerator DoubleShot()
+    private IEnumerator Co_DoubleShot()
     {
         BulletPoolManager.Instance.Spawn(BulletType.EnemyBullet, shootTransform.position, angle +90);
         yield return new WaitForSeconds(0.2f);

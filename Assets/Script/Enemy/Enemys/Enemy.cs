@@ -64,15 +64,15 @@ public abstract class Enemy : MonoBehaviour
     private void HpDown(int damage)
     {
         if (curHp <= 0)
-            StartCoroutine(Destroy());
+            StartCoroutine(Co_Destroy());
         else
         {
             curHp -= damage;
-            StartCoroutine(OnHit());
+            StartCoroutine(Co_OnHit());
         }
     }
-    
-    private IEnumerator Destroy()
+
+    protected virtual IEnumerator Co_Destroy()
     {
         animator.SetTrigger(hashDestroy);
         collider.enabled = false;
@@ -112,7 +112,7 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    private IEnumerator OnHit()
+    private IEnumerator Co_OnHit()
     {
         spriteRenderer.color = new Color(1, 1, 1, 0.1f);
         yield return new WaitForSeconds(0.1f);
