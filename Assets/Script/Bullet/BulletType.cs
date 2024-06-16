@@ -1,4 +1,4 @@
 public enum BulletType
 {
-    Bullet, PowerUpBullet, EnemyBullet
+    Bullet, PowerUpBullet, EnemyBullet, 
 }

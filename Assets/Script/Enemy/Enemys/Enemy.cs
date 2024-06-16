@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Timeline;
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
@@ -8,12 +9,34 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] private int maxHp;
     [SerializeField] private int curHp;
     [SerializeField] private float shootCoolTime;
-    [SerializeField] protected Transform shootTransform;
+    [SerializeField] private float moveDownSpeed;
+
+    private SpriteRenderer spriteRenderer;
+    private new BoxCollider2D collider;
+    private Animator animator;
+    private readonly int hashDestroy = Animator.StringToHash("Destroy");
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        collider = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
+    }
 
     private void Start()
     {
         curHp = maxHp;
-        StartCoroutine(Co_Shoot());
+       StartCoroutine(Co_Shot());
+    }
+
+    protected virtual void Update()
+    {
+        MoveDown();
+    }
+
+    private void MoveDown()
+    {
+        transform.Translate(Vector2.down.normalized * Time.deltaTime * moveDownSpeed, Space.World);
     }
 
     public void StartMove(float moveTime, Vector2 startPosition, Vector2 endPosition)
@@ -23,7 +46,7 @@ public abstract class Enemy : MonoBehaviour
 
     public void StartShoot()
     {
-        StartCoroutine(Co_Shoot());
+        StartCoroutine(Co_Shot());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -32,16 +55,28 @@ public abstract class Enemy : MonoBehaviour
         {
             HpDown(collision.gameObject.GetComponent<Bullet>().GetDamage());
         }
+        else if (collision.gameObject.CompareTag("Beam"))
+        {
+            HpDown(collision.gameObject.GetComponent<Beam>().GetDamage());
+        }
     }
 
     private void HpDown(int damage)
     {
-        curHp -= damage;
-        if (curHp <= 0) Destroy();
+        if (curHp <= 0)
+            StartCoroutine(Destroy());
+        else
+        {
+            curHp -= damage;
+            StartCoroutine(OnHit());
+        }
     }
     
-    private void Destroy()
+    private IEnumerator Destroy()
     {
+        animator.SetTrigger(hashDestroy);
+        collider.enabled = false;
+        yield return new WaitForSeconds(1f);
         EnemyPoolManager.Instance.DeSpawn(type, this.gameObject);
     }
 
@@ -66,17 +101,27 @@ public abstract class Enemy : MonoBehaviour
         transform.position = endPosition;
     }
 
-    protected abstract void Shoot();
+    protected abstract void Shot();
 
-    private IEnumerator Co_Shoot()
+    private IEnumerator Co_Shot()
     {
-        Shoot();
-        yield return new WaitForSeconds(shootCoolTime);
-        StartCoroutine(Co_Shoot());
+        while (true)
+        {
+            Shot();
+            yield return new WaitForSeconds(shootCoolTime);
+        }
+    }
+
+    private IEnumerator OnHit()
+    {
+        spriteRenderer.color = new Color(1, 1, 1, 0.1f);
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = Color.white;
     }
 
     private void OnEnable()
     {
         curHp = maxHp;
+        collider.enabled = true;
     }
 }

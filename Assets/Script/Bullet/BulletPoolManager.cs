@@ -31,7 +31,7 @@ public class BulletPoolManager : MonoBehaviour
             bulletPrefabDict[bulletData.type] = bulletData.prefab;
             stackDict[bulletData.type] = new Stack<GameObject>(); // 수정된 부분
 
-            for (int j = 0; j < 200; j++)
+            for (int j = 0; j < bulletData.spawnSize; j++)
             {
                 GameObject bullet = Instantiate(bulletData.prefab);
                 bullet.SetActive(false);
@@ -64,7 +64,7 @@ public class BulletPoolManager : MonoBehaviour
 
         bullet.SetActive(true);
         bullet.transform.position = spawnPoint;
-        bullet.transform.rotation = Quaternion.AngleAxis(angle +90, Vector3.forward);
+        bullet.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         return bullet;
     }

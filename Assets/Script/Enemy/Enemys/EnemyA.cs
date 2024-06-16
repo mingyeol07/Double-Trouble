@@ -1,0 +1,34 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class EnemyA : Enemy
+{
+    private float angle;
+    private readonly float rotationSpeed = 6f;
+    [SerializeField] private Transform shootTransform;
+
+    protected override void Update()
+    {
+        base.Update();
+        LookAtPlayer();
+    }
+
+    private void LookAtPlayer()
+    {
+        angle = PlayerManager.Instance.GetLookNearPlayerAngle(transform.position) ;
+        transform.rotation = Quaternion.Slerp( transform.rotation, Quaternion.Euler(0, 0, angle - 90), Time.deltaTime * rotationSpeed);
+    }
+
+    protected override void Shot()
+    {
+        StartCoroutine(DoubleShot());
+    }
+
+    private IEnumerator DoubleShot()
+    {
+        BulletPoolManager.Instance.Spawn(BulletType.EnemyBullet, shootTransform.position, angle +90);
+        yield return new WaitForSeconds(0.2f);
+        BulletPoolManager.Instance.Spawn(BulletType.EnemyBullet, shootTransform.position, angle +90);
+    }
+}

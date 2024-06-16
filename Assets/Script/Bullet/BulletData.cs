@@ -8,4 +8,5 @@ public class BulletData
 {
     public BulletType type;
     public GameObject prefab;
+    public int spawnSize;
 }

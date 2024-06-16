@@ -34,7 +34,7 @@ public class EnemyPoolManager : MonoBehaviour
             enemyPrefabDict[enemyData.type] = enemyData.prefab;
             stackDict[enemyData.type] = new Stack<GameObject>(); // 수정된 부분
 
-            for (int j = 0; j < 200; j++)
+            for (int j = 0; j < enemyData.spawnSize; j++)
             {
                 GameObject enemy = Instantiate(enemyData.prefab);
                 enemy.SetActive(false);

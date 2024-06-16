@@ -8,4 +8,5 @@ public class EnemyData
 {
     public EnemyType type;
     public GameObject prefab;
+    public int spawnSize;
 }

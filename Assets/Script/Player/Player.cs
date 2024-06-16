@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("EnemyBullet"))
+        if (collision.gameObject.CompareTag("EnemyBullet") || collision.gameObject.CompareTag("EnemyBeam"))
         {
             HpDown();
         }
@@ -38,15 +38,17 @@ public class Player : MonoBehaviour
 
     private IEnumerator ShootDelay()
     {
-        ShootBullet();
-        yield return new WaitForSeconds(shootDelayTime);
-        StartCoroutine(ShootDelay());
+        while(true)
+        {
+            ShootBullet();
+            yield return new WaitForSeconds(shootDelayTime);
+        }
     }
 
     private void ShootBullet()
     {
-        BulletPoolManager.Instance.Spawn(bulletType, shootPositionLeft.position, -90);
-        BulletPoolManager.Instance.Spawn(bulletType, shootPositionRight.position, -90);
+        BulletPoolManager.Instance.Spawn(bulletType, shootPositionLeft.position, 0);
+        BulletPoolManager.Instance.Spawn(bulletType, shootPositionRight.position, 0);
     }
 
     private void HpDown()
