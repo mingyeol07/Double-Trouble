@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnionPlayer : Player
+public abstract class UnionPlayer : Player
 {
     [SerializeField] private float moveSpeed;
     [SerializeField] private float unionTime;
+    [SerializeField] private Animator weaponAnim;
+    private readonly int hashWeaponShot = Animator.StringToHash("Shot");
+    private bool weaponShoting;
     private Rigidbody2D rigid;
 
     private void Awake()
@@ -25,6 +28,23 @@ public class UnionPlayer : Player
         MoveInput();
     }
 
+    protected override void ShotBullet()
+    {
+        base.ShotBullet();
+        if(!weaponShoting)
+        {
+            weaponShoting = true;
+            weaponAnim.SetTrigger(hashWeaponShot);
+        }
+    }
+
+    protected abstract void UnionWeaponShot();
+
+    private void Anim_ShotExit()
+    {
+        weaponShoting = false;
+    }
+
     private void MoveInput()
     {
         float h = Input.GetAxisRaw("HorizontalMultiple");
@@ -42,6 +62,6 @@ public class UnionPlayer : Player
     {
         yield return new WaitForSeconds(unionTime);
         PlayerManager.Instance.SetActivePlayers(true);
-        gameObject.SetActive(false);
+        Destroy(this.gameObject);
     }
 }

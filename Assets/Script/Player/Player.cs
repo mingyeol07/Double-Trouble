@@ -1,9 +1,5 @@
 using System.Collections;
-using System.Xml;
-using Unity.VisualScripting;
-using UnityEditor.Tilemaps;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -14,18 +10,16 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform shootPositionRight;
 
     [SerializeField] private float shootDelayTime;
-    private BulletType bulletType;
+    [SerializeField] private BulletType bulletType;
 
     protected virtual void Start()
     {
         curHp = maxHp;
-        bulletType = BulletType.Bullet;
-       
     }
 
     protected virtual void Update()
     {
-
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -36,16 +30,16 @@ public class Player : MonoBehaviour
         }
     }
 
-    private IEnumerator ShootDelay()
+    private IEnumerator ShotDelay()
     {
         while(true)
         {
-            ShootBullet();
+            ShotBullet();
             yield return new WaitForSeconds(shootDelayTime);
         }
     }
 
-    private void ShootBullet()
+    protected virtual void ShotBullet()
     {
         BulletPoolManager.Instance.Spawn(bulletType, shootPositionLeft.position, 0);
         BulletPoolManager.Instance.Spawn(bulletType, shootPositionRight.position, 0);
@@ -67,6 +61,6 @@ public class Player : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        StartCoroutine(ShootDelay());
+        StartCoroutine(ShotDelay());
     }
 }

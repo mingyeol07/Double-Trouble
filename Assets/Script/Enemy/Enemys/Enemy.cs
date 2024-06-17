@@ -26,7 +26,7 @@ public abstract class Enemy : MonoBehaviour
     private void Start()
     {
         curHp = maxHp;
-       StartCoroutine(Co_Shot());
+        StartCoroutine(Co_Shot());
     }
 
     protected virtual void Update()
@@ -115,7 +115,7 @@ public abstract class Enemy : MonoBehaviour
     private IEnumerator Co_OnHit()
     {
         spriteRenderer.color = new Color(1, 1, 1, 0.1f);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.05f);
         spriteRenderer.color = Color.white;
     }
 

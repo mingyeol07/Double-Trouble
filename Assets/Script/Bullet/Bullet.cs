@@ -34,9 +34,18 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") && type == BulletType.Bullet)
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            Destroy();
+            if(type == BulletType.LeftBullet)
+            {
+                PlayerManager.Instance.SetLeftPlayerGaugePlus();
+                Destroy();
+            }
+            else if(type == BulletType.RightBullet)
+            {
+                PlayerManager.Instance.SetRightPlayerGaugePlus();
+                Destroy();
+            }
         }
         else if (collision.gameObject.CompareTag("Player") && type == BulletType.EnemyBullet)
         {
@@ -58,5 +67,10 @@ public class Bullet : MonoBehaviour
     {
         yield return new WaitForSeconds(destroyWaitTime);
         Destroy();
+    }
+
+    public void PlayerIsLeft(bool isLeft)
+    {
+        
     }
 }

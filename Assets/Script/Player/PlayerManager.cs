@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -10,10 +11,14 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Player player_R;
     private Transform player_L_Transform;
     private Transform player_R_Transform;
-    private bool player_left_AbleUnion;
-    private bool player_right_AbleUnion;
 
-    [SerializeField] private GameObject[] player_union; 
+    [SerializeField] private Image image_L_Gauge;
+    [SerializeField] private Image image_R_Gauge;
+    private int L_Gauge;
+    private int R_Gauge;
+    private readonly float maxGauge = 100;
+
+    [SerializeField] private GameObject[] unionPlayer; 
 
     private void Awake()
     {
@@ -24,7 +29,12 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        if (player_left_AbleUnion && player_right_AbleUnion) {
+        if (L_Gauge >= maxGauge && R_Gauge >= maxGauge) 
+        {
+            L_Gauge = 0;
+            R_Gauge = 0;
+            image_L_Gauge.fillAmount = L_Gauge;
+            image_R_Gauge.fillAmount = R_Gauge;
             Union();
         }
     }
@@ -55,22 +65,21 @@ public class PlayerManager : MonoBehaviour
 
     public void Union()
     {
-        player_left_AbleUnion = false;
-        player_right_AbleUnion = false;
-
         SetActivePlayers(false);
         int randomIndex = Random.Range(0, 4);
-        GameObject unionPlayer = Instantiate(player_union[randomIndex]);
-        unionPlayer.transform.position = player_L_Transform.position;
+        GameObject randomUnionPlayer = Instantiate(unionPlayer[randomIndex]);
+        randomUnionPlayer.transform.position = player_L_Transform.position;
     }
 
-    public void SetLeftPlayerAbleUnion(bool isAble)
+    public void SetLeftPlayerGaugePlus()
     {
-        player_left_AbleUnion = isAble;
+        L_Gauge++;
+        image_L_Gauge.fillAmount = (float)L_Gauge / maxGauge;
     }
 
-    public void SetRightPlayerAbleUnion(bool isAble)
+    public void SetRightPlayerGaugePlus()
     {
-        player_right_AbleUnion = isAble;
+        R_Gauge++;
+        image_R_Gauge.fillAmount = (float)R_Gauge / maxGauge;
     }
 }

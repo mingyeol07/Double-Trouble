@@ -6,6 +6,8 @@ public class PlayerControlLeft : Player
 {
     [SerializeField] private float moveSpeed;
     private Rigidbody2D rigid;
+    [SerializeField] private Animator engineAnimator;
+    private readonly int hashBoosting = Animator.StringToHash("Boosting");
 
     private void Awake()
     {
@@ -21,6 +23,8 @@ public class PlayerControlLeft : Player
     {
         base.Update();
         MoveInput();
+
+
     }
 
     private void MoveInput()
@@ -29,5 +33,14 @@ public class PlayerControlLeft : Player
         float v = Input.GetAxisRaw("Vertical");
 
         rigid.velocity = new Vector2(h, v).normalized * moveSpeed;
+
+        if(v > 0)
+        {
+            engineAnimator.SetBool(hashBoosting, true);
+        }
+        else
+        {
+            engineAnimator.SetBool(hashBoosting, false);
+        }
     }
 }
