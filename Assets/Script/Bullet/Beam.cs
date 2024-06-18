@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Beam : MonoBehaviour
+public class Beam : Bullet
 {
-    [SerializeField] private int damage;
-
-    public int GetDamage()
+    protected override void Update()
     {
-        return damage;
+        
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
     }
 }

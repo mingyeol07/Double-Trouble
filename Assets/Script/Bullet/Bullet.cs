@@ -17,7 +17,7 @@ public class Bullet : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         rigid.velocity = transform.up * moveSpeed;
     }
@@ -46,6 +46,14 @@ public class Bullet : MonoBehaviour
                 PlayerManager.Instance.SetRightPlayerGaugePlus();
                 Destroy();
             }
+            else if(type == BulletType.Beam)
+            {
+                
+            }
+            else
+            {
+                Destroy();
+            }
         }
         else if (collision.gameObject.CompareTag("Player") && type == BulletType.EnemyBullet)
         {
@@ -58,7 +66,7 @@ public class Bullet : MonoBehaviour
         BulletPoolManager.Instance.DeSpawn(type, this.gameObject);
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         StartCoroutine(DistroyDelay());
     }
@@ -67,10 +75,5 @@ public class Bullet : MonoBehaviour
     {
         yield return new WaitForSeconds(destroyWaitTime);
         Destroy();
-    }
-
-    public void PlayerIsLeft(bool isLeft)
-    {
-        
     }
 }

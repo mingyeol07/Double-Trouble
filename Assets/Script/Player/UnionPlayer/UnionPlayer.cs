@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class UnionPlayer : MonoBehaviour
 {
-
     [SerializeField] private int maxHp;
     [SerializeField] private int curHp;
 
     [SerializeField] private float shootDelayTime;
-    [SerializeField] private BulletType bulletType;
 
     [SerializeField] private float moveSpeed;
     [SerializeField] private float unionTime;
     [SerializeField] private Animator weaponAnim;
     private readonly int hashWeaponShot = Animator.StringToHash("Shot");
-    private bool weaponShoting;
+    public bool weaponShoting;
     private Rigidbody2D rigid;
 
     private void Awake()
@@ -77,11 +75,6 @@ public class UnionPlayer : MonoBehaviour
     protected virtual void OnEnable()
     {
         StartCoroutine(ShotDelay());
-    }
-
-    private void Anim_ShotExit()
-    {
-        weaponShoting = false;
     }
 
     private void MoveInput()

@@ -1,4 +1,4 @@
 public enum BulletType
 {
-    LeftBullet, RightBullet, EnemyBullet, 
+    LeftBullet, RightBullet, EnemyBullet, Arrow, Magnet, Auto, Beam
 }
