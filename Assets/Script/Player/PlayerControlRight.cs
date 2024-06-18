@@ -14,18 +14,7 @@ public class PlayerControlRight : Player
         rigid = GetComponent<Rigidbody2D>();
     }
 
-    protected override void Start()
-    {
-        base.Start();
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-        MoveInput();
-    }
-
-    private void MoveInput()
+    protected override void MoveInput()
     {
         float h = Input.GetAxisRaw("HorizontalArrow");
         float v = Input.GetAxisRaw("VerticalArrow");

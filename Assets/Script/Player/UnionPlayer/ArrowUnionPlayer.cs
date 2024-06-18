@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArrowUnionPlayer : MonoBehaviour
+public class ArrowUnionPlayer : UnionPlayer
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject arrow;
+    [SerializeField] private Transform[] shotPosition;
+    
+    private void ShotArrow(int shotPositionIndex)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Instantiate(arrow, shotPosition[shotPositionIndex].position, Quaternion.identity);
     }
 }

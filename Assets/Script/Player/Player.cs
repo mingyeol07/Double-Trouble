@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public abstract class Player : MonoBehaviour
 {
     [SerializeField] private int maxHp;
     [SerializeField] private int curHp;
@@ -17,10 +17,12 @@ public class Player : MonoBehaviour
         curHp = maxHp;
     }
 
-    protected virtual void Update()
+    private void FixedUpdate()
     {
-        
+        MoveInput();
     }
+
+    protected abstract void MoveInput();
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

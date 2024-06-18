@@ -2,8 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class UnionPlayer : Player
+public class UnionPlayer : MonoBehaviour
 {
+
+    [SerializeField] private int maxHp;
+    [SerializeField] private int curHp;
+
+    [SerializeField] private float shootDelayTime;
+    [SerializeField] private BulletType bulletType;
+
     [SerializeField] private float moveSpeed;
     [SerializeField] private float unionTime;
     [SerializeField] private Animator weaponAnim;
@@ -16,29 +23,61 @@ public abstract class UnionPlayer : Player
         rigid = GetComponent<Rigidbody2D>();
     }
 
-    protected override void Start()
+    protected virtual void Start()
     {
-        base.Start();
+        curHp = maxHp;
         StartCoroutine(Co_StartUnionTime());
     }
 
-    protected override void Update()
+    protected virtual void FixedUpdate()
     {
-        base.Update();
         MoveInput();
     }
 
-    protected override void ShotBullet()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        base.ShotBullet();
-        if(!weaponShoting)
+        if (collision.gameObject.CompareTag("EnemyBullet") || collision.gameObject.CompareTag("EnemyBeam"))
+        {
+            HpDown();
+        }
+    }
+
+    private IEnumerator ShotDelay()
+    {
+        while (true)
+        {
+            ShotBullet();
+            yield return new WaitForSeconds(shootDelayTime);
+        }
+    }
+
+    private void ShotBullet()
+    {
+        if (!weaponShoting)
         {
             weaponShoting = true;
             weaponAnim.SetTrigger(hashWeaponShot);
         }
     }
 
-    protected abstract void UnionWeaponShot();
+    private void HpDown()
+    {
+        curHp--;
+        if (curHp <= 0)
+        {
+            GameOver();
+        }
+    }
+
+    private void GameOver()
+    {
+
+    }
+
+    protected virtual void OnEnable()
+    {
+        StartCoroutine(ShotDelay());
+    }
 
     private void Anim_ShotExit()
     {
@@ -51,11 +90,6 @@ public abstract class UnionPlayer : Player
         float v = Input.GetAxisRaw("VerticalMultiple");
 
         rigid.velocity = new Vector2(h, v).normalized * moveSpeed;
-    }
-
-    protected override void GameOver()
-    {
-        
     }
 
     private IEnumerator Co_StartUnionTime()
