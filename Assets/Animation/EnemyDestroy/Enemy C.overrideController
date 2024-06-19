@@ -7,5 +7,7 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Enemy C
-  m_Controller: {fileID: 0}
-  m_Clips: []
+  m_Controller: {fileID: 9100000, guid: 797d12b7ec46800429da90184fe542dd, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: d854b77ab63ea7e4b89d125a3d933dc2, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: dd83b14ba48d8dd449c73f3b38b84fb4, type: 2}
