@@ -8,14 +8,14 @@ public class RocketEngine : MonoBehaviour
     [SerializeField] private Transform shotRightTransform;
     [SerializeField] private UnionPlayer unionPlayer;
 
-    private void shotLeftMagnet()
+    private void ShotLeftMagnet()
     {
-        BulletPoolManager.Instance.Spawn(BulletType.Magnet, shotLeftTransform.position, 0);
+        BulletPoolManager.Instance.Spawn(BulletType.Rocket, shotLeftTransform.position, 0);
     }
 
-    private void shotRightMagnet()
+    private void ShotRightMagnet()
     {
-        BulletPoolManager.Instance.Spawn(BulletType.Magnet, shotRightTransform.position, 0);
+        BulletPoolManager.Instance.Spawn(BulletType.Rocket, shotRightTransform.position, 0);
     }
 
     private void Anim_ShotExit()

@@ -17,7 +17,7 @@ public class EnemyA : Enemy
     private void LookAtPlayer()
     {
         angle = PlayerManager.Instance.GetLookNearPlayerAngle(transform.position) ;
-        transform.rotation = Quaternion.Slerp( transform.rotation, Quaternion.Euler(0, 0, angle - 90), Time.deltaTime * rotationSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, angle - 90), Time.deltaTime * rotationSpeed);
     }
 
     protected override void Shot()

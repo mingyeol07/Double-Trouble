@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Player : MonoBehaviour
@@ -6,11 +7,12 @@ public abstract class Player : MonoBehaviour
     [SerializeField] private int maxHp;
     [SerializeField] private int curHp;
 
-    [SerializeField] private Transform shootPositionLeft;
-    [SerializeField] private Transform shootPositionRight;
+    [SerializeField] private List<Transform> shootPosition = new();
 
     [SerializeField] private float shootDelayTime;
     [SerializeField] private BulletType bulletType;
+
+    private int level = 0;
 
     protected virtual void Start()
     {
@@ -43,8 +45,10 @@ public abstract class Player : MonoBehaviour
 
     protected virtual void ShotBullet()
     {
-        BulletPoolManager.Instance.Spawn(bulletType, shootPositionLeft.position, 0);
-        BulletPoolManager.Instance.Spawn(bulletType, shootPositionRight.position, 0);
+        for(int i = 0; i< shootPosition.Count; i++)
+        {
+            BulletPoolManager.Instance.Spawn(bulletType, shootPosition[i].position, 0);
+        }
     }
 
     private void HpDown()
@@ -64,5 +68,11 @@ public abstract class Player : MonoBehaviour
     protected virtual void OnEnable()
     {
         StartCoroutine(ShotDelay());
+    }
+
+    private void LevelUp(Transform transform)
+    {
+        level++;
+        shootPosition.Add(transform);
     }
 }

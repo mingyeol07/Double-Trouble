@@ -27,14 +27,8 @@ public class BossBarrier : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (isLeftBarrier)
-            {
-                onLeftBarrierRing = false;
-            }
-            else
-            {
-                onRightBarrierRing = false;
-            }
+            onLeftBarrierRing = false;
+            onRightBarrierRing = false;
         }
     }
 

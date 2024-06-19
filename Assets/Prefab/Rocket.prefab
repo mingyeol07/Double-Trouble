@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1798683885047472994}
   - component: {fileID: 1798683885047472997}
-  - component: {fileID: 9037315554040236810}
   - component: {fileID: 1749535788485667200}
   - component: {fileID: 6629670538678782639}
+  - component: {fileID: -7650642468527766320}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Bullet
@@ -87,22 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &9037315554040236810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1798683885047472995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a502d6b92b1f1ba45995e1b805ed1292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 3
-  damage: 1
-  moveSpeed: 15
-  destroyWaitTime: 1
 --- !u!50 &1749535788485667200
 Rigidbody2D:
   serializedVersion: 4
@@ -137,6 +121,22 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.021547675, y: -0.060725242}
-  m_Size: {x: 0.13309535, y: 0.5385495}
+  m_Offset: {x: 0.0002758652, y: 0.22783056}
+  m_Size: {x: 0.20099086, y: 0.79558235}
   m_Direction: 0
+--- !u!114 &-7650642468527766320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798683885047472995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e447c25165709a41b1b76a668c9b6fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 4
+  damage: 1
+  moveSpeed: 15
+  destroyWaitTime: 1
