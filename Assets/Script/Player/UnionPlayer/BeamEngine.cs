@@ -10,7 +10,8 @@ public class BeamEngine : MonoBehaviour
 
     private void ShotBeam()
     {
-        Instantiate(beam, shotTransform.position, Quaternion.identity);
+        GameObject go = Instantiate(beam, shotTransform.position, Quaternion.identity);
+        go.transform.parent = transform;
     }
 
     private void Anim_ShotExit()

@@ -61,7 +61,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    private void Destroy()
+    protected virtual void Destroy()
     {
         BulletPoolManager.Instance.DeSpawn(type, this.gameObject);
     }

@@ -12,14 +12,14 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] private float moveDownSpeed;
 
     private SpriteRenderer spriteRenderer;
-    private new BoxCollider2D collider;
+    private new Collider2D collider;
     private Animator animator;
     private readonly int hashDestroy = Animator.StringToHash("Destroy");
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        collider = GetComponent<BoxCollider2D>();
+        collider = GetComponent<Collider2D>();
         animator = GetComponent<Animator>();
     }
 
@@ -114,7 +114,7 @@ public abstract class Enemy : MonoBehaviour
 
     private IEnumerator Co_OnHit()
     {
-        spriteRenderer.color = new Color(1, 1, 1, 0.1f);
+        spriteRenderer.color = new Color(1, 1, 1, 0.5f);
         yield return new WaitForSeconds(0.1f);
         spriteRenderer.color = Color.white;
     }

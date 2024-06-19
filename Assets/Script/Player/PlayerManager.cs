@@ -42,21 +42,37 @@ public class PlayerManager : MonoBehaviour
     public float GetLookNearPlayerAngle(Vector2 position)
     {
         Vector2 nearPosition = Vector2.zero;
-        float leftPlayerDistance;
-        float rightPlayerDistance;
 
-        // 플레이어와 받아온 포지션(적의 포지션)의 거리를 가져옴
-        leftPlayerDistance = Vector2.Distance(position, player_L_Transform.position);
-        rightPlayerDistance = Vector2.Distance(position, player_R_Transform.position);
 
         // 더 가까운 쪽의 플레이어를 가져옴
-        nearPosition = leftPlayerDistance > rightPlayerDistance ? player_R_Transform.position : player_L_Transform.position;
+        nearPosition = GetNearPlayer(position);
 
         Vector2 direction = (position - nearPosition).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         return angle;
     }
+
+    private Vector2 GetNearPlayer(Vector2 offset)
+    {
+        for(int i = 0 ; i < unionPlayer.Length ; i++)
+        {
+            if(unionPlayer[i].activeSelf == true)
+            {
+               // return unionPlayer[i].transform.position;
+            }
+        }
+
+        float leftPlayerDistance;
+        float rightPlayerDistance;
+
+        // 플레이어와 받아온 포지션(적의 포지션)의 거리를 가져옴
+        leftPlayerDistance = Vector2.Distance(offset, player_L_Transform.position);
+        rightPlayerDistance = Vector2.Distance(offset, player_R_Transform.position);
+
+        return leftPlayerDistance > rightPlayerDistance ? player_R_Transform.position : player_L_Transform.position;
+    }
+
     public void SetActivePlayers(bool isActive)
     {
         player_L.gameObject.SetActive(isActive);
