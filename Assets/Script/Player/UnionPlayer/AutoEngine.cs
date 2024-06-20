@@ -13,8 +13,4 @@ public class AutoEngine : MonoBehaviour
         BulletPoolManager.Instance.Spawn(BulletType.Auto, shotLeftTransform.position, 0);
         BulletPoolManager.Instance.Spawn(BulletType.Auto, shotRightTransform.position, 0);
     }
-    private void Anim_ShotExit()
-    {
-        unionPlayer.weaponShoting = false;
-    }
 }

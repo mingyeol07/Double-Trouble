@@ -11,11 +11,5 @@ public class BeamEngine : MonoBehaviour
     private void ShotBeam()
     {
         GameObject go = Instantiate(beam, shotTransform.position, Quaternion.identity);
-        go.transform.parent = transform;
-    }
-
-    private void Anim_ShotExit()
-    {
-        unionPlayer.weaponShoting = false;
     }
 }

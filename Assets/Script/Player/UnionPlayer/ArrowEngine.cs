@@ -11,8 +11,4 @@ public class ArrowEngine : MonoBehaviour
     {
         BulletPoolManager.Instance.Spawn(BulletType.Arrow, shotPosition[shotPositionIndex].position, 0);
     }
-    private void Anim_ShotExit()
-    {
-        unionPlayer.weaponShoting = false;
-    }
 }

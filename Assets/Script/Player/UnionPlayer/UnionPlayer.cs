@@ -11,9 +11,9 @@ public class UnionPlayer : MonoBehaviour
 
     [SerializeField] private float moveSpeed;
     [SerializeField] private float unionTime;
-    [SerializeField] private Animator weaponAnim;
+    [SerializeField] private Animator engineAnim;
     private readonly int hashWeaponShot = Animator.StringToHash("Shot");
-    public bool weaponShoting;
+    private bool weaponShoting;
     private Rigidbody2D rigid;
 
     private void Awake()
@@ -24,7 +24,9 @@ public class UnionPlayer : MonoBehaviour
     protected virtual void Start()
     {
         curHp = maxHp;
+        PlayerManager.Instance.SetUnionPlayer(gameObject);
         StartCoroutine(Co_StartUnionTime());
+        StartCoroutine(ShotDelay());
     }
 
     protected virtual void FixedUpdate()
@@ -54,8 +56,17 @@ public class UnionPlayer : MonoBehaviour
         if (!weaponShoting)
         {
             weaponShoting = true;
-            weaponAnim.SetTrigger(hashWeaponShot);
+            engineAnim.SetTrigger(hashWeaponShot);
+            StartCoroutine(AnimExit());
         }
+    }
+
+    private IEnumerator AnimExit()
+    {
+        yield return new WaitForSeconds(0.01f);
+        float time = engineAnim.GetCurrentAnimatorClipInfo(0).Length / 10;
+        yield return new WaitForSeconds(time);
+        weaponShoting = false;
     }
 
     private void HpDown()
@@ -72,11 +83,6 @@ public class UnionPlayer : MonoBehaviour
 
     }
 
-    protected virtual void OnEnable()
-    {
-        StartCoroutine(ShotDelay());
-    }
-
     private void MoveInput()
     {
         float h = Input.GetAxisRaw("HorizontalMultiple");
@@ -88,7 +94,7 @@ public class UnionPlayer : MonoBehaviour
     private IEnumerator Co_StartUnionTime()
     {
         yield return new WaitForSeconds(unionTime);
-        PlayerManager.Instance.SetActivePlayers(true);
+        PlayerManager.Instance.ExitUnion();
         Destroy(this.gameObject);
     }
 }

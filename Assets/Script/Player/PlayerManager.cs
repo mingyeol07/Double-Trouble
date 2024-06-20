@@ -12,13 +12,19 @@ public class PlayerManager : MonoBehaviour
     private Transform player_L_Transform;
     private Transform player_R_Transform;
 
+    private Vector2 startUnionPosition_L;
+    private Vector2 startUnionPosition_R;
+
     [SerializeField] private Image image_L_Gauge;
     [SerializeField] private Image image_R_Gauge;
     private int L_Gauge;
     private int R_Gauge;
     private readonly float maxGauge = 100;
 
-    [SerializeField] private GameObject[] unionPlayer; 
+    [SerializeField] private GameObject[] unionPlayers;
+    private GameObject unionpPlayer;
+
+    [SerializeField] private Image unionLight;
 
     private void Awake()
     {
@@ -35,14 +41,23 @@ public class PlayerManager : MonoBehaviour
             R_Gauge = 0;
             image_L_Gauge.fillAmount = L_Gauge;
             image_R_Gauge.fillAmount = R_Gauge;
-            Union();
+            StartUnion();
         }
+    }
+
+
+    public void SetUnionPlayer(GameObject player)
+    {
+        unionpPlayer = player;
+    }
+    private void InitUnionPlayer()
+    {
+        unionpPlayer = null;
     }
 
     public float GetLookNearPlayerAngle(Vector2 position)
     {
         Vector2 nearPosition = Vector2.zero;
-
 
         // 더 가까운 쪽의 플레이어를 가져옴
         nearPosition = GetNearPlayer(position);
@@ -55,12 +70,9 @@ public class PlayerManager : MonoBehaviour
 
     private Vector2 GetNearPlayer(Vector2 offset)
     {
-        for(int i = 0 ; i < unionPlayer.Length ; i++)
+        if(unionpPlayer != null)
         {
-            if(unionPlayer[i].activeSelf == true)
-            {
-               // return unionPlayer[i].transform.position;
-            }
+            return unionpPlayer.transform.position;
         }
 
         float leftPlayerDistance;
@@ -73,6 +85,94 @@ public class PlayerManager : MonoBehaviour
         return leftPlayerDistance > rightPlayerDistance ? player_R_Transform.position : player_L_Transform.position;
     }
 
+    public void StartUnion()
+    {
+        player_L.enabled = false;
+        player_R.enabled = false;
+
+        startUnionPosition_L = player_L_Transform.position;
+        startUnionPosition_R = player_R_Transform.position;
+
+        Vector2 centerVec = new Vector2((player_L_Transform.position.x + player_R_Transform.position.x) / 2,
+            (player_L_Transform.position.y + player_R_Transform.position.y) / 2);
+
+        StartCoroutine(MovePlayerCenter(centerVec));
+    }
+
+    private IEnumerator MovePlayerCenter(Vector2 center)
+    {
+        float duration = 0.5f;
+        float time = 0;
+
+        Vector2 initialPosition_L = player_L_Transform.position;
+        Vector2 initialPosition_R = player_R_Transform.position;
+
+        
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float t = time / duration;
+
+            float sineT = Mathf.Sin(t * Mathf.PI * 0.5f);
+
+            player_L_Transform.position = Vector2.Lerp(initialPosition_L, center, sineT);
+            player_R_Transform.position = Vector2.Lerp(initialPosition_R, center, sineT);
+
+            yield return null;
+        }
+
+        player_L_Transform.position = center;
+        player_R_Transform.position = center;
+
+        Union();
+        unionLight.fillAmount = 1;
+        /*
+        duration = 0.5f;
+        time = 0;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float t = time / duration;
+
+            float sineT = Mathf.Sin(t * Mathf.PI * 0.5f);
+
+            unionLight.fillAmount = Mathf.Lerp(0, 1, sineT); 
+
+            yield return null;
+        }*/
+
+        unionLight.fillAmount = 0;
+        // 최종 위치를 정확히 설정
+
+    }
+
+    public void ExitUnion()
+    {
+        SetActivePlayers(true);
+        InitUnionPlayer();
+        StartCoroutine(ReturnPlayer());
+    }
+
+    private IEnumerator ReturnPlayer()
+    {
+        player_L.enabled = true;
+        player_R.enabled = true;
+
+        float duration = 0.5f;
+        float time = 0;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float t = time / duration;
+            float sineT = Mathf.Sin(t * Mathf.PI * 0.5f);
+
+            player_L_Transform.position = Vector2.Lerp(player_L_Transform.position, startUnionPosition_L, sineT);
+            player_R_Transform.position = Vector2.Lerp(player_R_Transform.position, startUnionPosition_R, sineT);
+            yield return null;
+        }
+    }
+
     public void SetActivePlayers(bool isActive)
     {
         player_L.gameObject.SetActive(isActive);
@@ -83,7 +183,7 @@ public class PlayerManager : MonoBehaviour
     {
         SetActivePlayers(false);
         int randomIndex = Random.Range(0, 4);
-        GameObject randomUnionPlayer = Instantiate(unionPlayer[randomIndex]);
+        GameObject randomUnionPlayer = Instantiate(unionPlayers[randomIndex]);
         randomUnionPlayer.transform.position = player_L_Transform.position;
     }
 

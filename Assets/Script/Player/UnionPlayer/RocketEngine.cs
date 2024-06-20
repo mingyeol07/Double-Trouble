@@ -17,9 +17,4 @@ public class RocketEngine : MonoBehaviour
     {
         BulletPoolManager.Instance.Spawn(BulletType.Rocket, shotRightTransform.position, 0);
     }
-
-    private void Anim_ShotExit()
-    {
-        unionPlayer.weaponShoting = false;
-    }
 }
