@@ -10,7 +10,6 @@ public class TitleManager : MonoBehaviour
     [SerializeField] private Animator canvasAnimator;
     private readonly int hashSetting = Animator.StringToHash("OnSetting");
     private readonly int hashHowToPlay = Animator.StringToHash("OnHowToPlay");
-    private readonly int hashCredit = Animator.StringToHash("OnCredit");
 
     private void Awake()
     {
@@ -33,9 +32,6 @@ public class TitleManager : MonoBehaviour
             case TitleButtonType.HowToPlay:
                 HowToPlay(active);
                 break;
-            case TitleButtonType.Credit: 
-                Credit(active);
-                break;
         }
     }
 
@@ -54,9 +50,5 @@ public class TitleManager : MonoBehaviour
     private void Setting(bool active)
     {
         canvasAnimator.SetBool(hashSetting, active);
-    }
-    private void Credit(bool active)
-    {
-        canvasAnimator.SetBool(hashCredit, active);
     }
 }

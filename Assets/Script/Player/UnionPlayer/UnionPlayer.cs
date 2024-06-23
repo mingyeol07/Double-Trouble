@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class UnionPlayer : MonoBehaviour
 {
@@ -11,10 +12,14 @@ public class UnionPlayer : MonoBehaviour
 
     [SerializeField] private float moveSpeed;
     [SerializeField] private float unionTime;
+    [SerializeField] private GameObject unionLight;
     [SerializeField] private Animator engineAnim;
     private readonly int hashWeaponShot = Animator.StringToHash("Shot");
     private bool weaponShoting;
     private Rigidbody2D rigid;
+    [SerializeField] private GameObject shield;
+    [SerializeField] private Animator boostAnim;
+    private readonly int hashBoosting = Animator.StringToHash("Boosting");
 
     private void Awake()
     {
@@ -23,10 +28,23 @@ public class UnionPlayer : MonoBehaviour
 
     protected virtual void Start()
     {
+        StartCoroutine(Shield());
         curHp = maxHp;
+        GameObject go = Instantiate(unionLight, transform);
+        go.transform.position = transform.position;
+        Destroy(go, 1);
         PlayerManager.Instance.SetUnionPlayer(gameObject);
         StartCoroutine(Co_StartUnionTime());
         StartCoroutine(ShotDelay());
+    }
+
+    private IEnumerator Shield()
+    {
+        GameObject go = Instantiate(shield, transform);
+        GetComponent<Collider2D>().enabled = false;
+        yield return new WaitForSeconds(3f);
+        Destroy(go);
+        GetComponent<Collider2D>().enabled = true;
     }
 
     protected virtual void FixedUpdate()
@@ -89,6 +107,8 @@ public class UnionPlayer : MonoBehaviour
         float v = Input.GetAxisRaw("VerticalMultiple");
 
         rigid.velocity = new Vector2(h, v).normalized * moveSpeed;
+
+        boostAnim.SetBool(hashBoosting, v != 0 || h != 0);
     }
 
     private IEnumerator Co_StartUnionTime()

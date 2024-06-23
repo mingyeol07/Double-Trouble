@@ -160,7 +160,7 @@ MonoBehaviour:
   type: 0
   maxHp: 100
   curHp: 0
-  shootCoolTime: 1
+  shootCoolTime: 5
   moveDownSpeed: 0.2
   shootTransform: {fileID: 5670045569649360378}
 --- !u!95 &6291321887923778591

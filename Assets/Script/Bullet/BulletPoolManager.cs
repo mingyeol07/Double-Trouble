@@ -61,7 +61,7 @@ public class BulletPoolManager : MonoBehaviour
         {
             bullet = InstantiatePrefab(bulletType);
         }
-
+        
         bullet.SetActive(true);
         bullet.transform.position = spawnPoint;
         bullet.transform.parent = transform;

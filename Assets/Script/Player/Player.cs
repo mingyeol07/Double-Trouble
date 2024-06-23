@@ -12,7 +12,7 @@ public abstract class Player : MonoBehaviour
     [SerializeField] private float shootDelayTime;
     [SerializeField] private BulletType bulletType;
 
-    private int level = 0;
+    [SerializeField] private GameObject shield;
 
     protected virtual void Start()
     {
@@ -68,11 +68,15 @@ public abstract class Player : MonoBehaviour
     protected virtual void OnEnable()
     {
         StartCoroutine(ShotDelay());
+        StartCoroutine(Shield());
     }
 
-    private void LevelUp(Transform transform)
+    private IEnumerator Shield()
     {
-        level++;
-        shootPosition.Add(transform);
+        GameObject go = Instantiate(shield, transform);
+        GetComponent<Collider2D>().enabled = false;
+        yield return new WaitForSeconds(3f);
+        GetComponent<Collider2D>().enabled = true;
+        Destroy(go);
     }
 }

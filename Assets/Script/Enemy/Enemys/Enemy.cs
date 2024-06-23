@@ -26,7 +26,7 @@ public abstract class Enemy : MonoBehaviour
     private void Start()
     {
         curHp = maxHp;
-        StartCoroutine(Co_Shot());
+        //StartCoroutine(Co_Shot());
     }
 
     protected virtual void Update()
@@ -36,7 +36,7 @@ public abstract class Enemy : MonoBehaviour
 
     private void MoveDown()
     {
-        transform.Translate(Vector2.down.normalized * Time.deltaTime * moveDownSpeed, Space.World);
+        transform.Translate(Vector2.down * Time.deltaTime * moveDownSpeed, Space.World);
     }
 
     public void StartMove(float moveTime, Vector2 startPosition, Vector2 endPosition)

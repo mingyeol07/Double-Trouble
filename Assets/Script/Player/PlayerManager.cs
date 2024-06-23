@@ -24,8 +24,6 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private GameObject[] unionPlayers;
     private GameObject unionpPlayer;
 
-    [SerializeField] private Image unionLight;
-
     private void Awake()
     {
         Instance = this;
@@ -125,26 +123,6 @@ public class PlayerManager : MonoBehaviour
         player_R_Transform.position = center;
 
         Union();
-        unionLight.fillAmount = 1;
-        /*
-        duration = 0.5f;
-        time = 0;
-
-        while (time < duration)
-        {
-            time += Time.deltaTime;
-            float t = time / duration;
-
-            float sineT = Mathf.Sin(t * Mathf.PI * 0.5f);
-
-            unionLight.fillAmount = Mathf.Lerp(0, 1, sineT); 
-
-            yield return null;
-        }*/
-
-        unionLight.fillAmount = 0;
-        // 최종 위치를 정확히 설정
-
     }
 
     public void ExitUnion()

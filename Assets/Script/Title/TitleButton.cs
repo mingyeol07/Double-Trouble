@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public enum TitleButtonType
 {
-    Start, HowToPlay, Setting, Credit, Exit
+    Start, HowToPlay, Setting, Exit
 }
 
 public class TitleButton : MonoBehaviour

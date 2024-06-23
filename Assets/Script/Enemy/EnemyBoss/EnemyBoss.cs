@@ -1,5 +1,7 @@
 // # Systems
 using System.Collections;
+using Unity.VisualScripting;
+
 
 // # Unity
 using UnityEngine;
@@ -9,33 +11,64 @@ public class EnemyBoss : Enemy
     [SerializeField] private BossBarrier barrierLeft;
     [SerializeField] private BossBarrier barrierRight;
 
+    [SerializeField] private Transform[] leftShootTransform;
+    [SerializeField] private Transform[] rightShootTransform;
+
     protected override void Shot()
     {
-        int ranNum = 0; // Random.Range(0, 5);
-
-        switch(ranNum)
-        {
-            case 0:
-                CirclePattern();
-                break;
-            case 1:
-                BarrierPattern();
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-        }
+        StartCoroutine(RandomPattern());
     }
 
-    private void CirclePattern()
+    private IEnumerator RandomPattern()
+    {
+        int ranNum = Random.Range(0, 3);
+
+        switch (ranNum)
+        {
+            case 0:
+                StartCoroutine(CircleShoot());
+                break;
+            case 1:
+                StartCoroutine(LeftShoot());
+                break;
+            case 2:
+                StartCoroutine(RightShoot());
+                break;
+        }
+
+        yield return null;
+    }
+
+    private IEnumerator CircleShoot()
     {
         for (int i = 0; i < 360; i += 13)
         {
-            BulletPoolManager.Instance.Spawn(BulletType.EnemyBullet, transform.position, i).GetComponent<Bullet>().SetSpeed(3);
+            BulletPoolManager.Instance.Spawn(BulletType.EnemyBullet, transform.position, i);
+            yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    private IEnumerator LeftShoot()
+    {
+        for(int i = 0; i< leftShootTransform.Length ; i++)
+        {
+            BulletPoolManager.Instance.Spawn(BulletType.EnemyBullet, leftShootTransform[i].position, 180);
+            yield return null;
+        }
+    }
+
+    private IEnumerator RightShoot()
+    {
+        for (int i = 0; i < leftShootTransform.Length; i++)
+        {
+            BulletPoolManager.Instance.Spawn(BulletType.EnemyBullet, rightShootTransform[i].position, 180);
+            yield return null;
+        }
+    }
+
+    private void SpawnInterceptor()
+    {
+
     }
 
     private void BarrierPattern()

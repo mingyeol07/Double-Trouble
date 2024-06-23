@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: AutoBooooting
+  m_Controller: {fileID: 9100000, guid: 78c46af24f23ac34d86715fa726fb597, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 795b45b8fb5d6fb408d2eff5bae5f6c8, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ab3866ae919e1d54b8f55c16b7b593f6, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 133c387a82cf0c34ba865e377e933a8a, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e1a64b159f7749d44985604a2e407d34, type: 2}
