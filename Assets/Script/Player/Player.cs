@@ -30,6 +30,7 @@ public abstract class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("EnemyBullet") || collision.gameObject.CompareTag("EnemyBeam"))
         {
+            Camera.main.GetComponent<CameraShake>().StartShake();
             HpDown();
         }
     }

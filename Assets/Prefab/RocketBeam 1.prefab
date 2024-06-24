@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 240092405506486236}
   - component: {fileID: 1311338726610874410}
   - component: {fileID: 3375967270744345654}
+  - component: {fileID: 8239951753942211160}
   m_Layer: 0
   m_Name: RocketBeam 1
   m_TagString: Beam
@@ -73,6 +74,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0378424, y: 21.14829}
   m_EdgeRadius: 0
+--- !u!50 &8239951753942211160
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546030807281591947}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &2697054774474209104
 GameObject:
   m_ObjectHideFlags: 0
