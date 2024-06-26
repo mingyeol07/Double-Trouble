@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class EditerData
+public class EnemySpawnData
 {
     public EnemyType enemyType;
     public Vector2 startPosition;
