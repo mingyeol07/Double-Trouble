@@ -6,64 +6,53 @@ using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour
 {
-    public static EnemySpawnManager Instance;
+    private float gameTime;
+    private bool spawned;
+    private StageData stageData;
+    private StageJsonSave jsonSave;
 
-    [SerializeField] private EnemyWayPointData[] leftWayPoint;
-    [SerializeField] private EnemyWayPointData[] rightWayPoint;
-    [SerializeField] private EnemyWayPointData[] frontWayPoint;
-
-    private void Awake()
+    private void Start()
     {
-        Instance = this;
+        gameTime = 0;
+        stageData = jsonSave.LoadData();
     }
 
-    public IEnumerator EnemySpawnLeft(EnemyType enemy)
+    private void Update()
     {
-        for (int i = 0; i < leftWayPoint.Length; i++) {
-            EnemySpawn(enemy, 1f, leftWayPoint[i].StartPoint, leftWayPoint[i].EndPoint);
-            yield return null;
-        }
-
+        if(stageData.maxTime > gameTime) gameTime += Time.deltaTime;
+        if(!spawned)TimeLineCheck();
     }
 
-    public IEnumerator EnemySpawnRight(EnemyType enemy)
+    private void TimeLineCheck()
     {
-        for (int i = 0; i < rightWayPoint.Length; i++)
+        if (Mathf.RoundToInt(gameTime) % 5 == 0)
         {
-            EnemySpawn(enemy, 1f, rightWayPoint[i].StartPoint, rightWayPoint[i].EndPoint);
-            yield return null;
+            spawned = true;
+            StartCoroutine(GetTimeLineEnemy(Mathf.RoundToInt(gameTime)));
         }
     }
 
-    public IEnumerator EnemySpawnFront(EnemyType enemy)
+    private IEnumerator GetTimeLineEnemy(int time)
     {
-        for (int i = 0; i < rightWayPoint.Length; i++)
+        foreach(EnemySpawnData enemySpawnData in stageData.spawnDatas)
         {
-            EnemySpawn(enemy, 1f, frontWayPoint[i].StartPoint, frontWayPoint[i].EndPoint);
-            yield return null;
+            if(enemySpawnData.spawnTime == time)
+            {
+                SpawnEnemy(enemySpawnData);
+            }
         }
+        yield return new WaitForSeconds(4);
+        spawned = false;
     }
 
-    public IEnumerator EnemySpawnCross(EnemyType enemy)
+    private void SpawnEnemy(EnemySpawnData spawnData)
     {
-        EnemySpawn(enemy, 5f, leftWayPoint[2].StartPoint, rightWayPoint[0].EndPoint);
-        EnemySpawn(enemy, 5f, rightWayPoint[0].StartPoint, leftWayPoint[2].EndPoint);
+        Vector2 startPos = new Vector2(spawnData.startPos.x, spawnData.startPos.y);
+        Vector2 endPos = new Vector2(spawnData.endPos.x, spawnData.endPos.y);
 
-        yield return null;
-    }
+        GameObject enemy = EnemyPoolManager.Instance.Spawn(spawnData.enemyType);
+        enemy.transform.position = startPos;
 
-    private void EnemySpawn(EnemyType enemyType, float moveTime, Vector2 startPosition, Vector2 endPosition)
-    {
-        GameObject enemy = EnemyPoolManager.Instance.Spawn(enemyType);
-        enemy.GetComponent<Enemy>().StartMove(moveTime, startPosition, endPosition);
-
-        if (enemyType == EnemyType.EnemyB) StartCoroutine(StartShoot(0, enemy.GetComponent<Enemy>()));
-        else StartCoroutine(StartShoot(moveTime, enemy.GetComponent<Enemy>()));
-    }
-
-    private IEnumerator StartShoot(float waitTime, Enemy enemy)
-    {
-        yield return new WaitForSeconds(waitTime);
-        enemy.StartShoot();
+        enemy.GetComponent<Enemy>().StartMove(1, startPos, endPos);
     }
 }
