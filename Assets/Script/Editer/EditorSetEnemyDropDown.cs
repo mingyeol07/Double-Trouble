@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EditerSetEnemyDropDown : MonoBehaviour
+public class EditorSetEnemyDropDown : MonoBehaviour
 {
-    public EnemyType enemyType;
+    public EnemyType enemyType {  get; private set; }
 
     public void OnDropDownEvent(int index)
     {
