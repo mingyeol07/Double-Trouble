@@ -59,6 +59,7 @@ public class EditorManager : MonoBehaviour
         SetUp();
         AddButtonListeners();
         LoadStageData();
+        stageData.maxTime = maxTime;
     }
 
     // 초기 설정

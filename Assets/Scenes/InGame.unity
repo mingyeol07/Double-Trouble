@@ -673,6 +673,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 6550824290242854683, guid: ab12cc3529b16e04db77b1f37b538dce, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6550824290242854684, guid: ab12cc3529b16e04db77b1f37b538dce, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -1128,7 +1132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 431155331}
   - component: {fileID: 431155333}
-  - component: {fileID: 431155332}
+  - component: {fileID: 431155334}
   m_Layer: 0
   m_Name: SpawnManager
   m_TagString: Untagged
@@ -1151,21 +1155,6 @@ Transform:
   m_Father: {fileID: 736090165}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &431155332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 431155330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beabbafed19a9de4ba74b0d5ef220589, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxTime: 40
-  playTime: 0
-  bossA: {fileID: 6550824290242854683, guid: ab12cc3529b16e04db77b1f37b538dce, type: 3}
 --- !u!114 &431155333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1178,31 +1167,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddb13864a4560524d9db7a75b290cb8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftWayPoint:
-  - StartPoint: {x: -11, y: 3}
-    EndPoint: {x: -8, y: 3}
-  - StartPoint: {x: -11, y: 1}
-    EndPoint: {x: -8, y: 1}
-  - StartPoint: {x: -11, y: -1}
-    EndPoint: {x: -8, y: -1}
-  rightWayPoint:
-  - StartPoint: {x: 11, y: 3}
-    EndPoint: {x: 8, y: 3}
-  - StartPoint: {x: 11, y: 1}
-    EndPoint: {x: 8, y: 1}
-  - StartPoint: {x: 11, y: -1}
-    EndPoint: {x: 8, y: -1}
-  frontWayPoint:
-  - StartPoint: {x: 8, y: 6}
-    EndPoint: {x: 8, y: 3}
-  - StartPoint: {x: 4, y: 6}
-    EndPoint: {x: 4, y: 3}
-  - StartPoint: {x: 0, y: 6}
-    EndPoint: {x: 0, y: 3}
-  - StartPoint: {x: -4, y: 6}
-    EndPoint: {x: -4, y: 3}
-  - StartPoint: {x: -8, y: 6}
-    EndPoint: {x: -8, y: 3}
+--- !u!114 &431155334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431155330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3789e671fc5941346a5331898a33ee1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &463765708
 GameObject:
   m_ObjectHideFlags: 0

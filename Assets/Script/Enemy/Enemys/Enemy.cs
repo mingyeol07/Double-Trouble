@@ -26,7 +26,6 @@ public abstract class Enemy : MonoBehaviour
     private void Start()
     {
         curHp = maxHp;
-        //StartCoroutine(Co_Shot());
     }
 
     protected virtual void Update()

@@ -6,42 +6,50 @@ using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour
 {
-    private float gameTime;
+    private int gameTime5X;
     private bool spawned;
     private StageData stageData;
     private StageJsonSave jsonSave;
 
     private void Start()
     {
-        gameTime = 0;
+        jsonSave = GetComponent<StageJsonSave>();
         stageData = jsonSave.LoadData();
+        Debug.Log(stageData.maxTime);
+        gameTime5X = 0;
+        StartCoroutine(UpdateTime());
     }
 
-    private void Update()
+    private IEnumerator UpdateTime()
     {
-        if(stageData.maxTime > gameTime) gameTime += Time.deltaTime;
-        if(!spawned)TimeLineCheck();
+        
+        while (stageData.maxTime > gameTime5X)
+        {
+          
+            TimeLineCheck();
+            yield return new WaitForSeconds(5f);
+            gameTime5X += 5;
+        }
     }
 
     private void TimeLineCheck()
     {
-        if (Mathf.RoundToInt(gameTime) % 5 == 0)
-        {
-            spawned = true;
-            StartCoroutine(GetTimeLineEnemy(Mathf.RoundToInt(gameTime)));
-        }
+        spawned = true;
+        StartCoroutine(GetTimeLineEnemy(gameTime5X));
     }
 
     private IEnumerator GetTimeLineEnemy(int time)
     {
         foreach(EnemySpawnData enemySpawnData in stageData.spawnDatas)
         {
-            if(enemySpawnData.spawnTime == time)
+            
+            if (enemySpawnData.spawnTime == time)
             {
+                
                 SpawnEnemy(enemySpawnData);
             }
         }
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(3);
         spawned = false;
     }
 
@@ -53,6 +61,14 @@ public class EnemySpawnManager : MonoBehaviour
         GameObject enemy = EnemyPoolManager.Instance.Spawn(spawnData.enemyType);
         enemy.transform.position = startPos;
 
-        enemy.GetComponent<Enemy>().StartMove(1, startPos, endPos);
+       enemy.GetComponent<Enemy>().StartMove(1, startPos, endPos);
+        StartCoroutine(ShootLate(enemy.GetComponent<Enemy>(), 1));
+
+    }
+
+    private IEnumerator ShootLate(Enemy enemy, float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        enemy.StartShoot();
     }
 }
