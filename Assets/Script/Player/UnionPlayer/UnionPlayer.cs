@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
-
+/// <summary>
+/// 합체한 플레이어
+/// </summary>
 public class UnionPlayer : MonoBehaviour
 {
     [SerializeField] private int maxHp;
@@ -89,16 +91,18 @@ public class UnionPlayer : MonoBehaviour
 
     private void HpDown()
     {
-        curHp--;
-        if (curHp <= 0)
+        Camera.main.GetComponent<CameraShake>().StartShake(0.3f);
         {
+            if (curHp-- <= 0)
             GameOver();
         }
     }
 
     private void GameOver()
     {
-
+        StopAllCoroutines();
+        PlayerManager.Instance.ExitUnion();
+        Destroy(this.gameObject);
     }
 
     private void MoveInput()

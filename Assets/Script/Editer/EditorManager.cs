@@ -16,7 +16,9 @@ public class StageData
         spawnDatas = new List<EnemySpawnData>();
     }
 }
-
+/// <summary>
+/// 슬라이더를 조절하고, Editer의 전체적인 UI를 관리하는 스크립트
+/// </summary>
 public class EditorManager : MonoBehaviour
 {
     [SerializeField] private EditorSetEnemyDropDown enemyDropDown;

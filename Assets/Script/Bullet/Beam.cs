@@ -2,35 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 소환되면 줄기가 보이다가 한번에 펴지는 빔
+/// </summary>
 public class Beam : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer[] sprites;
+    private Animator animator;
+    private BoxCollider2D boxCollider;
+
+    private void Awake()
+    {
+        boxCollider = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
+    }
 
     private void Start()
     {
-        sprites = GetComponentsInChildren<SpriteRenderer>();
-        StartCoroutine(Destroy());
+        animator.SetTrigger("OnBeam");
     }
 
-    private IEnumerator Destroy()
-    {
-        yield return new WaitForSeconds(0.5f);
-        float time = 0.5f;
 
-        while (time > 0)
-        {
-            time-= Time.deltaTime;
-            for (int i = 0; i < sprites.Length; i++)
-            {
-                sprites[i].color = new Color(1, 1, 1, time);
-            }
-            yield return null;
-        }
-        Destroy(this.gameObject);
+    private void OnEnable()
+    {
+        OffCollider();
+        animator.SetTrigger("OnBeam");
     }
 
-    public int GetDamage()
+    private void OnDisable()
     {
-        return 1;
+        OffCollider();
+    }
+
+    // Animator Event
+    public void ExitAnimation()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void OffCollider()
+    {
+        boxCollider.enabled = false;
+    }
+
+    public void OnCollider()
+    {
+        boxCollider.enabled = true;
     }
 }

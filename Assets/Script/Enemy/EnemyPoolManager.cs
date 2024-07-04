@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Enemy를 소환하는 풀매니저
+/// </summary>
 public class EnemyPoolManager : MonoBehaviour
 {
     public static EnemyPoolManager Instance;

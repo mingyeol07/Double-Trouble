@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+/// <summary>
+/// Json을 불러와 정보를 읽고 시간에 따라 Eenmy를 소환하는
+/// </summary>
 public class EnemySpawnManager : MonoBehaviour
 {
     private int gameTime5X;

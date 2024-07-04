@@ -43,6 +43,7 @@ public class EnemyBoss : Enemy
     {
         for (int i = 0; i < 360; i += 13)
         {
+            Debug.Log("dd");
             BulletPoolManager.Instance.Spawn(BulletType.EnemyBullet, transform.position, i);
             yield return new WaitForSeconds(0.1f);
         }
@@ -84,6 +85,7 @@ public class EnemyBoss : Enemy
 
     protected override IEnumerator Co_Destroy()
     {
+        PlayerManager.Instance.GameClear();
         yield return null;
     }
 }

@@ -6,7 +6,9 @@ using System.Text;
 
 // # Unity
 using UnityEngine;
-
+/// <summary>
+/// Json저장을 돕는 클래스
+/// </summary>
 public class StageJsonSave : MonoBehaviour
 {
     public void SaveData(StageData stageData)

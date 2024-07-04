@@ -140,4 +140,4 @@ MonoBehaviour:
   damage: 1
   moveSpeed: 15
   destroyWaitTime: 1
-  beam: {fileID: 546030807281591947, guid: 0cfe21ad28cccb1478700b165f592ac8, type: 3}
+  beam: {fileID: 8892684574460209447, guid: bf955f3d90fb48f47abfc4d367afcc41, type: 3}

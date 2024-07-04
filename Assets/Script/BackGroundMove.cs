@@ -4,7 +4,9 @@ using System.Collections.Generic;
 
 // # Unity
 using UnityEngine;
-
+/// <summary>
+/// 배경스크롤
+/// </summary>
 public class BackGroundMove : MonoBehaviour
 {
     [SerializeField] private Transform target;

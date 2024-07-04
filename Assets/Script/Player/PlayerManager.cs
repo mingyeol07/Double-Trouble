@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+/// <summary>
+/// 플레이어에 관련된 모든 것을 관리하는 매니저 (합체, 스타트, 게임오버 등)
+/// </summary>
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance;
@@ -19,6 +21,10 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Image image_R_Gauge;
     private int L_Gauge;
     private int R_Gauge;
+
+    public bool isPlay {  get; private set; }
+    [SerializeField] private GameObject txt_Start;
+    [SerializeField] private GameObject txt_Clear;
     private readonly float maxGauge = 100;
 
     [SerializeField] private GameObject[] unionPlayers;
@@ -27,8 +33,30 @@ public class PlayerManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        isPlay = false;
         player_L_Transform = player_L.transform;
         player_R_Transform = player_R.transform;
+    }
+
+    private void Start()
+    {
+        player_L.GetComponent<Animator>().SetTrigger("Start");
+        player_R.GetComponent<Animator>().SetTrigger("Start");
+        StartCoroutine(LeadyStart());
+    }
+
+    private IEnumerator LeadyStart()
+    {
+        yield return new WaitForSeconds(1);
+        player_L.StartSetup();
+        player_R.StartSetup();
+        isPlay = true;
+        txt_Start.SetActive(true);
+    }
+
+    public void GameClear()
+    {
+        txt_Clear.SetActive(true);
     }
 
     private void Update()

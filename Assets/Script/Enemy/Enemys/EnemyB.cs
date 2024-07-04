@@ -6,7 +6,9 @@ using UnityEditor.Timeline;
 
 // # Unity
 using UnityEngine;
-
+/// <summary>
+/// 회전하며 예측불가능하게 총알을 쏘는 Enemy
+/// </summary>
 public class EnemyB : Enemy
 {
     [SerializeField] private Transform[] shootTransform;

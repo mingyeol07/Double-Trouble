@@ -5,6 +5,9 @@ using System.Collections.Generic;
 // # Unity
 using UnityEngine;
 
+/// <summary>
+/// Bullet을 상속받은 AutoBullet 스크립트
+/// </summary>
 public class AutoBullet : Bullet
 {
     [SerializeField] private float rotationSpeed;
@@ -15,6 +18,9 @@ public class AutoBullet : Bullet
         FindCloseEnemy();
     }
 
+    /// <summary>
+    /// 적의 위치로 방향을 꺾는다.
+    /// </summary>
     private void FindCloseEnemy()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 20f, LayerMask.GetMask("Enemy"));
@@ -33,6 +39,9 @@ public class AutoBullet : Bullet
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
     }
 
+    /// <summary>
+    /// 가까운 적의 위치를 찾는다.
+    /// </summary>
     private Vector2 CloseTargetPosition(Collider2D[] collider)
     {
         float distance = float.MaxValue;

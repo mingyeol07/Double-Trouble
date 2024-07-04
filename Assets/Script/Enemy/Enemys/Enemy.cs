@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Timeline;
 using UnityEngine;
-
+/// <summary>
+/// Enemy들의 부모클래스
+/// </summary>
 public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] private EnemyType type;
@@ -26,6 +28,7 @@ public abstract class Enemy : MonoBehaviour
     private void Start()
     {
         curHp = maxHp;
+        StartCoroutine(Co_Shot());
     }
 
     protected virtual void Update()
@@ -45,7 +48,7 @@ public abstract class Enemy : MonoBehaviour
 
     public void StartShoot()
     {
-        StartCoroutine(Co_Shot());
+        if(gameObject.activeSelf) StartCoroutine(Co_Shot());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -56,13 +59,13 @@ public abstract class Enemy : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Beam"))
         {
-            HpDown(collision.gameObject.GetComponent<Beam>().GetDamage());
+            HpDown(100);
         }
     }
 
     private void HpDown(int damage)
     {
-        if (curHp <= 0)
+        if ((curHp - damage) <= 0)
             StartCoroutine(Co_Destroy());
         else
         {
@@ -75,7 +78,7 @@ public abstract class Enemy : MonoBehaviour
     {
         animator.SetTrigger(hashDestroy);
         collider.enabled = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.7f);
         EnemyPoolManager.Instance.DeSpawn(type, this.gameObject);
     }
 

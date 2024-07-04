@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
+/// <summary>
+/// Bullet들을 관리하는 풀매니저
+/// </summary>
 public class BulletPoolManager : MonoBehaviour
 {
     public static BulletPoolManager Instance;

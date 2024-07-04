@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// 오른쪽 플레이어 컨트롤러
+/// </summary>
 public class PlayerControlRight : Player
 {
     [SerializeField] private float moveSpeed;
+    [SerializeField] private GameObject miniPlayer;
+    [SerializeField] private Transform miniPlayerPos;
     private Rigidbody2D rigid;
     [SerializeField] private Animator engineAnimator;
     private readonly int hashBoosting = Animator.StringToHash("Boosting");
@@ -29,5 +33,12 @@ public class PlayerControlRight : Player
         {
             engineAnimator.SetBool(hashBoosting, false);
         }
+    }
+
+    protected override void GetIem()
+    {
+        GameObject mini = Instantiate(miniPlayer);
+        mini.transform.position = miniPlayerPos.position;
+        mini.transform.parent = miniPlayerPos.transform;
     }
 }

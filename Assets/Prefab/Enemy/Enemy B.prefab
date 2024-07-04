@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3977157851557880774}
   - component: {fileID: 2035042852464435358}
   - component: {fileID: 2859154338749295669}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy B
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -130,10 +130,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  maxHp: 100
+  maxHp: 20
   curHp: 0
   shootCoolTime: 1
-  moveDownSpeed: 0.2
+  moveDownSpeed: 0
   shootTransform:
   - {fileID: 3276738711723812532}
   - {fileID: 8104265867640663944}

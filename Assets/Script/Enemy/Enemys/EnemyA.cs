@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// 플레이어를 바라보며 주기적으로 총알을 쏘는 Enemy
+/// </summary>
 public class EnemyA : Enemy
 {
     private float angle;

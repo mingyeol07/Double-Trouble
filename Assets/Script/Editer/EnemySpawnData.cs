@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// JsonData로 저장할 클래스
+/// </summary>
 [Serializable]
 public class EnemySpawnData
 {
