@@ -23,12 +23,15 @@ public class EnemyD : Enemy
     {
         StartShoot();
         float time = 0;
-
+        moveTime = 5;
         while (time < moveTime)
         {
             time += Time.deltaTime;
-            transform.position = Vector2.Lerp(transform.position, startPosition, time / moveTime);
+            float t = time / moveTime;  // 비율 계산
+            transform.position = Vector2.Lerp(startPosition, endPosition, t);  // startPosition에서 endPosition으로 보간
             yield return null;
         }
+
+        transform.position = endPosition;  // 이동이 끝나면 정확한 목표 위치로 설정
     }
 }

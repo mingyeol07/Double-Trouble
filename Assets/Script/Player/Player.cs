@@ -8,6 +8,9 @@ using UnityEngine;
 /// </summary>
 public abstract class Player : MonoBehaviour
 {
+    [SerializeField] protected GameObject[] miniPlayer;
+    [SerializeField] private GameObject getItemLight;
+
     [SerializeField] private int maxHp;
     [SerializeField] private int curHp;
 
@@ -40,30 +43,43 @@ public abstract class Player : MonoBehaviour
 
         if(collision.gameObject.CompareTag("Item"))
         {
+            Destroy(Instantiate(getItemLight, transform.position, Quaternion.identity), 1f);
             Destroy(collision.gameObject);
-            GetIem();
+            SpawnMiniPlayer();
         }
     }
 
-    protected virtual void GetIem()
+    protected virtual void SpawnMiniPlayer()
     {
-
+        for (int i = 0; i < miniPlayer.Length; i++)
+        {
+            miniPlayer[i].SetActive(true);
+            miniPlayer[i].GetComponent<PlayerMini>().SetTime();
+        }
     }
 
-    private IEnumerator ShotDelay()
+    private IEnumerator ShootDelay()
     {
         while(true)
         {
-            ShotBullet();
+            ShootBullet();
             yield return new WaitForSeconds(shootDelayTime);
         }
     }
 
-    protected virtual void ShotBullet()
+    protected virtual void ShootBullet()
     {
         for(int i = 0; i< shootPosition.Count; i++)
         {
             BulletPoolManager.Instance.Spawn(bulletType, shootPosition[i].position, 0);
+        }
+
+        for(int i = 0; i < miniPlayer.Length; i++)
+        {
+            if(miniPlayer[i].activeSelf)
+            {
+                miniPlayer[i].GetComponent<PlayerMini>().Shoot();
+            }
         }
     }
 
@@ -88,7 +104,7 @@ public abstract class Player : MonoBehaviour
 
     public void StartSetup()
     {
-        StartCoroutine(ShotDelay());
+        StartCoroutine(ShootDelay());
         StartCoroutine(Shield());
     }
 

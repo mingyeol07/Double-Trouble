@@ -64,7 +64,15 @@ public class EditorManager : MonoBehaviour
         SetUp();
         AddButtonListeners();
         LoadStageData();
+        StageChange(stageDropDown.stage);
         stageData.maxTime = maxTime;
+    }
+
+    private void Update()
+    {
+        HandleMakeInput();
+        UpdateSlider();
+        UpdateMaxTimeFromInput();
     }
 
     // 초기 설정
@@ -108,7 +116,6 @@ public class EditorManager : MonoBehaviour
             }
         }
 
-        StageChange(stageDropDown.stage);
         UpdateTimelineScene();
     }
 
@@ -119,13 +126,6 @@ public class EditorManager : MonoBehaviour
         {
             jsonSave.SaveData(stageData, stageDropDown.stage);
         }
-    }
-
-    private void Update()
-    {
-        HandleMakeInput();
-        UpdateSlider();
-        UpdateMaxTimeFromInput();
     }
 
     // 스테이지가 변경되었을때

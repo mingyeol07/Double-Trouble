@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Timeline;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
@@ -18,22 +19,20 @@ public abstract class Enemy : MonoBehaviour
     private new Collider2D collider;
     private Animator animator;
     private readonly int hashDestroy = Animator.StringToHash("Destroy");
+    [SerializeField] private Sprite defaultSprite;
+    private bool onMoveDown;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         collider = GetComponent<Collider2D>();
         animator = GetComponent<Animator>();
-    }
-
-    private void Start()
-    {
-        curHp = maxHp;
+        
     }
 
     protected virtual void Update()
     {
-        MoveDown();
+        if(onMoveDown) MoveDown();
     }
 
     private void MoveDown()
@@ -61,6 +60,11 @@ public abstract class Enemy : MonoBehaviour
         {
             HpDown(100);
         }
+
+        if(collision.gameObject.CompareTag("EnemyDestroy"))
+        {
+            StartCoroutine(Co_Destroy());
+        }
     }
 
     private void HpDown(int damage)
@@ -78,8 +82,24 @@ public abstract class Enemy : MonoBehaviour
     {
         animator.SetTrigger(hashDestroy);
         collider.enabled = false;
-        yield return new WaitForSeconds(0.7f);
+        onMoveDown = false;
+        DropItem();
+        yield return null;  
+    }
+
+    private void DestroyAnimatorEvent()
+    {
+        spriteRenderer.sprite = defaultSprite;
         EnemyPoolManager.Instance.DeSpawn(type, this.gameObject);
+    }
+
+    private void DropItem()
+    {
+        int random = Random.Range(0, 5);
+        if(random == 0)
+        {
+            Instantiate(BulletPoolManager.Instance.item, transform.position, Quaternion.identity);
+        }
     }
 
     /// <summary>
@@ -91,7 +111,7 @@ public abstract class Enemy : MonoBehaviour
     protected virtual IEnumerator Co_StartMove(float moveTime, Vector2 startPosition, Vector2 endPosition)
     {
         Vector2 velocity = Vector2.zero;
-        float offset = 0.1f;
+        float offset = 0.2f;
 
         transform.position = startPosition;
 
@@ -101,7 +121,6 @@ public abstract class Enemy : MonoBehaviour
             yield return null;
         }
 
-        transform.position = endPosition;
         StartShoot();
     }
         
@@ -109,6 +128,7 @@ public abstract class Enemy : MonoBehaviour
 
     private IEnumerator Co_Shot()
     {
+        onMoveDown = true;
         while (true)
         {
             Shot();

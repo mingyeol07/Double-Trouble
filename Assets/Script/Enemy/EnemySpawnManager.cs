@@ -12,6 +12,7 @@ public class EnemySpawnManager : MonoBehaviour
     private int stageIndex;
     private StageData stageData;
     private StageJsonSave jsonSave;
+    private StageBackGroundManager backGroundManager;
 
     private void Start()
     {

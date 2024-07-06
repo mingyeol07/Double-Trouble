@@ -10,6 +10,7 @@ TagManager:
   - EnemyBeam
   - Beam
   - Item
+  - EnemyDestroy
   layers:
   - Default
   - TransparentFX

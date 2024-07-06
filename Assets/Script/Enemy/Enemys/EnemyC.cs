@@ -32,17 +32,13 @@ public class EnemyC : Enemy
     protected override void Shot()
     {
         beam.SetActive(true);
-        StartCoroutine(Co_BeamAnim());
+        StartCoroutine(ShootBeam());
     }
 
-    private IEnumerator Co_BeamAnim()
+    private IEnumerator ShootBeam()
     {
-        // 조준하는시간 
-        yield return new WaitForSeconds(2);
-
         isBeam = true;
-        // 방향을 정하고 기다림 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1f);
         isBeam = false;
     }
 }

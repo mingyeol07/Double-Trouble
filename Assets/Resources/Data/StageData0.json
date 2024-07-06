@@ -72,6 +72,138 @@
                 "x": -8,
                 "y": 1
             }
+        },
+        {
+            "spawnTime": 11,
+            "enemyType": 1,
+            "startPos": {
+                "x": -7,
+                "y": 9
+            },
+            "endPos": {
+                "x": 9,
+                "y": 4
+            }
+        },
+        {
+            "spawnTime": 12,
+            "enemyType": 1,
+            "startPos": {
+                "x": 11,
+                "y": 2
+            },
+            "endPos": {
+                "x": -5,
+                "y": 2
+            }
+        },
+        {
+            "spawnTime": 13,
+            "enemyType": 1,
+            "startPos": {
+                "x": -12,
+                "y": 5
+            },
+            "endPos": {
+                "x": 6,
+                "y": 4
+            }
+        },
+        {
+            "spawnTime": 14,
+            "enemyType": 1,
+            "startPos": {
+                "x": 12,
+                "y": 3
+            },
+            "endPos": {
+                "x": -6,
+                "y": 3
+            }
+        },
+        {
+            "spawnTime": 15,
+            "enemyType": 2,
+            "startPos": {
+                "x": -2,
+                "y": 8
+            },
+            "endPos": {
+                "x": -8,
+                "y": 3
+            }
+        },
+        {
+            "spawnTime": 16,
+            "enemyType": 2,
+            "startPos": {
+                "x": 4,
+                "y": 9
+            },
+            "endPos": {
+                "x": 7,
+                "y": 5
+            }
+        },
+        {
+            "spawnTime": 17,
+            "enemyType": 2,
+            "startPos": {
+                "x": -4,
+                "y": 7
+            },
+            "endPos": {
+                "x": -6,
+                "y": 5
+            }
+        },
+        {
+            "spawnTime": 19,
+            "enemyType": 3,
+            "startPos": {
+                "x": -4,
+                "y": 8
+            },
+            "endPos": {
+                "x": 0,
+                "y": 1
+            }
+        },
+        {
+            "spawnTime": 19,
+            "enemyType": 3,
+            "startPos": {
+                "x": 12,
+                "y": 5
+            },
+            "endPos": {
+                "x": 4,
+                "y": 5
+            }
+        },
+        {
+            "spawnTime": 19,
+            "enemyType": 3,
+            "startPos": {
+                "x": -13,
+                "y": 3
+            },
+            "endPos": {
+                "x": -8,
+                "y": 3
+            }
+        },
+        {
+            "spawnTime": 24,
+            "enemyType": 4,
+            "startPos": {
+                "x": 1,
+                "y": 10
+            },
+            "endPos": {
+                "x": 1,
+                "y": 4
+            }
         }
     ]
 }

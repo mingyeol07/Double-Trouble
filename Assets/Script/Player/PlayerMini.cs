@@ -4,22 +4,53 @@ using UnityEngine;
 
 public class PlayerMini : MonoBehaviour
 {
-    private Transform target;
+    [SerializeField] private bool isLeft;
+    [SerializeField] private Transform shootTransform;
+    [SerializeField] private float time;
+    private BulletType bulletType;
 
-    public void SetTarget(Transform TargetTransform)
+    private void Awake()
     {
-        target = TargetTransform;
-    }
-
-    private void MoveToTarget()
-    {
-
+        if(isLeft)
+        {
+            bulletType = BulletType.LeftBullet;
+        }
+        else
+        {
+            bulletType = BulletType.RightBullet;
+        }
     }
 
     private void Update()
     {
-        MoveToTarget();
+        if(time > 0)
+        {
+            time -= Time.deltaTime;
+        }
+
+        if(time <= 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
+    public void Shoot()
+    {
+        BulletPoolManager.Instance.Spawn(bulletType, shootTransform.position, 0);
+    }
 
+    private void OnEnable()
+    {
+        SetTime();
+    }
+
+    public void SetTime()
+    {
+        time = 10;
+    }
+
+    public void SetBulletType(BulletType type)
+    {
+        bulletType = type;
+    }
 }

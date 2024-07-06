@@ -10,17 +10,22 @@ public class UnionPlayer : MonoBehaviour
     [SerializeField] private int maxHp;
     [SerializeField] private int curHp;
 
+    [SerializeField] protected GameObject[] miniPlayer;
+    [SerializeField] private GameObject getItemLight;
+
     [SerializeField] private float shootDelayTime;
 
     [SerializeField] private float moveSpeed;
     [SerializeField] private float unionTime;
     [SerializeField] private GameObject unionLight;
     [SerializeField] private Animator engineAnim;
-    private readonly int hashWeaponShot = Animator.StringToHash("Shot");
+
     private bool weaponShoting;
     private Rigidbody2D rigid;
     [SerializeField] private GameObject shield;
     [SerializeField] private Animator boostAnim;
+
+    private readonly int hashWeaponShot = Animator.StringToHash("Shot");
     private readonly int hashBoosting = Animator.StringToHash("Boosting");
 
     private void Awake()
@@ -37,7 +42,7 @@ public class UnionPlayer : MonoBehaviour
         Destroy(go, 1);
         PlayerManager.Instance.SetUnionPlayer(gameObject);
         StartCoroutine(Co_StartUnionTime());
-        StartCoroutine(ShotDelay());
+        StartCoroutine(ShootDelay());
     }
 
     private IEnumerator Shield()
@@ -60,18 +65,35 @@ public class UnionPlayer : MonoBehaviour
         {
             HpDown();
         }
+
+        if (collision.gameObject.CompareTag("Item"))
+        {
+            Destroy(Instantiate(getItemLight, transform.position, Quaternion.identity), 1f);
+            Destroy(collision.gameObject);
+            SpawnMiniPlayer();
+        }
     }
 
-    private IEnumerator ShotDelay()
+    protected virtual void SpawnMiniPlayer()
+    {
+        for (int i = 0; i < miniPlayer.Length; i++)
+        {
+            miniPlayer[i].SetActive(true);
+            miniPlayer[i].GetComponent<PlayerMini>().SetTime();
+            //miniPlayer[i].GetComponent<PlayerMini>().SetBulletType(BulletType)
+        }
+    }
+
+    private IEnumerator ShootDelay()
     {
         while (true)
         {
-            ShotBullet();
+            ShootBullet();
             yield return new WaitForSeconds(shootDelayTime);
         }
     }
 
-    private void ShotBullet()
+    private void ShootBullet()
     {
         if (!weaponShoting)
         {

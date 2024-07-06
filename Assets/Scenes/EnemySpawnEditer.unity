@@ -4209,7 +4209,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'startPoint: Q
 
-    endPoint: W'
+    endPoint: W
+
+    Item: E'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5286,7 +5288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1854331984131564123, guid: 167a06d66e875a14f87564daa3f1c5d9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2897057292393870213, guid: 167a06d66e875a14f87564daa3f1c5d9, type: 3}
       propertyPath: m_Color.a
@@ -5860,7 +5862,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7314816150754577708, guid: 9972a916abaa45947824f176a7291418, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7314816150754577711, guid: 9972a916abaa45947824f176a7291418, type: 3}
       propertyPath: m_RootOrder

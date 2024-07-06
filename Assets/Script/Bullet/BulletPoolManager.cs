@@ -11,7 +11,7 @@ public class BulletPoolManager : MonoBehaviour
     public static BulletPoolManager Instance;
 
     [SerializeField] private List<BulletData> bulletDatas = new();
-
+    public GameObject item;
     private Dictionary<BulletType, GameObject> bulletPrefabDict;
     private Dictionary<BulletType, Stack<GameObject>> stackDict;
 

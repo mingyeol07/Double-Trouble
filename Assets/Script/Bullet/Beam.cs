@@ -16,12 +16,6 @@ public class Beam : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    private void Start()
-    {
-        animator.SetTrigger("OnBeam");
-    }
-
-
     private void OnEnable()
     {
         OffCollider();

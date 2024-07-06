@@ -7,8 +7,6 @@ using UnityEngine;
 public class PlayerControlLeft : Player
 {
     [SerializeField] private float moveSpeed;
-    [SerializeField] private GameObject miniPlayer;
-    [SerializeField] private Transform miniPlayerPos;
     private Rigidbody2D rigid;
     [SerializeField] private Animator engineAnimator;
     private readonly int hashBoosting = Animator.StringToHash("Boosting");
@@ -33,12 +31,5 @@ public class PlayerControlLeft : Player
         {
             engineAnimator.SetBool(hashBoosting, false);
         }
-    }
-
-    protected override void GetIem()
-    {
-        GameObject mini = Instantiate(miniPlayer);
-        mini.transform.position = miniPlayerPos.position;
-        mini.transform.parent = miniPlayerPos.transform;
     }
 }
