@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 /// <summary>
 /// 플레이어를 바라보며 주기적으로 총알을 쏘는 Enemy
 /// </summary>

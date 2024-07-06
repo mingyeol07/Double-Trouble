@@ -18,4 +18,17 @@ public class EnemyD : Enemy
             BulletPoolManager.Instance.Spawn(BulletType.EnemyBullet, shootTransform[i].position, 180);
         }
     }
+
+    protected override IEnumerator Co_StartMove(float moveTime, Vector2 startPosition, Vector2 endPosition)
+    {
+        StartShoot();
+        float time = 0;
+
+        while (time < moveTime)
+        {
+            time += Time.deltaTime;
+            transform.position = Vector2.Lerp(transform.position, startPosition, time / moveTime);
+            yield return null;
+        }
+    }
 }

@@ -11,10 +11,10 @@ using UnityEngine;
 /// </summary>
 public class StageJsonSave : MonoBehaviour
 {
-    public void SaveData(StageData stageData)
+    public void SaveData(StageData stageData, int stageIndex)
     {
         string directoryPath = Application.dataPath + "/Resources/Data";
-        string filePath = directoryPath + "/StageData.json";
+        string filePath = directoryPath + "/StageData" + stageIndex + ".json";
 
         // 디렉터리가 존재하지 않으면 생성
         if (!Directory.Exists(directoryPath))
@@ -27,9 +27,9 @@ public class StageJsonSave : MonoBehaviour
         File.WriteAllText(filePath, json);
     }
 
-    public StageData LoadData()
+    public StageData LoadData(int stageIndex)
     {
-        TextAsset test = Resources.Load<TextAsset>("Data/StageData");
+        TextAsset test = Resources.Load<TextAsset>("Data/StageData" + stageIndex);
         if (test != null)
         {
             string json = test.text;

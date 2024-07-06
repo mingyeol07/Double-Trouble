@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Timeline;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 /// <summary>
 /// Enemy들의 부모클래스
 /// </summary>
@@ -28,7 +29,6 @@ public abstract class Enemy : MonoBehaviour
     private void Start()
     {
         curHp = maxHp;
-        StartCoroutine(Co_Shot());
     }
 
     protected virtual void Update()
@@ -41,7 +41,7 @@ public abstract class Enemy : MonoBehaviour
         transform.Translate(Vector2.down * Time.deltaTime * moveDownSpeed, Space.World);
     }
 
-    public void StartMove(float moveTime, Vector2 startPosition, Vector2 endPosition)
+    public virtual void StartMove(float moveTime, Vector2 startPosition, Vector2 endPosition)
     {
         StartCoroutine(Co_StartMove(moveTime, startPosition, endPosition));
     }
@@ -83,26 +83,28 @@ public abstract class Enemy : MonoBehaviour
     }
 
     /// <summary>
-    /// Enemy가 스포될 때 실행시켜줘야하는 코루틴, targetTransform까지 moveTime동안 움직여서 포지션을 잡는 함수
+    /// Enemy가 스폰될 때 실행시켜줘야하는 코루틴, targetTransform까지 moveTime동안 움직여서 포지션을 잡는 함수
     /// </summary>
     /// <param name="moveTime"></param>
     /// <param name="targetTransform"></param>
     /// <returns></returns>
-    private IEnumerator Co_StartMove(float moveTime, Vector2 startPosition, Vector2 endPosition)
+    protected virtual IEnumerator Co_StartMove(float moveTime, Vector2 startPosition, Vector2 endPosition)
     {
-        float time = 0;
-        transform.position = startPosition;
-        while (time < moveTime)
-        {
-            float t = time / moveTime;
-            transform.position = Vector2.Lerp(startPosition, endPosition, t);
-            time += Time.deltaTime;
+        Vector2 velocity = Vector2.zero;
+        float offset = 0.1f;
 
+        transform.position = startPosition;
+
+        while (Vector2.Distance((Vector2)transform.position, endPosition) > offset)
+        {
+            transform.position = Vector2.SmoothDamp(transform.position, endPosition, ref velocity, moveTime);
             yield return null;
         }
-        transform.position = endPosition;
-    }
 
+        transform.position = endPosition;
+        StartShoot();
+    }
+        
     protected abstract void Shot();
 
     private IEnumerator Co_Shot()

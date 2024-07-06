@@ -13,9 +13,10 @@ public class SpawnPositionSetting : MonoBehaviour
     {
         for(int x = -13; x < 14; x ++)
         {
-            for(int y = -8; y < 9; y++)
+            for (int y = -8; y < 12; y++)
             {
-                Instantiate(positionPoint, new Vector2(x, y), Quaternion.identity);
+                GameObject point = Instantiate(positionPoint);
+                point.transform.position = new Vector2(x, y);
             }
         }
     }

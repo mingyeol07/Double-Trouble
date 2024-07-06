@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using static EnemySpawnData;
@@ -22,6 +23,8 @@ public class StageData
 public class EditorManager : MonoBehaviour
 {
     [SerializeField] private EditorSetEnemyDropDown enemyDropDown;
+    [SerializeField] private EditorSetStageDropDown stageDropDown;
+    [SerializeField] private GameObject[] stageBG;
     private StageJsonSave jsonSave;
 
     [Header("GO")]
@@ -95,7 +98,7 @@ public class EditorManager : MonoBehaviour
     private void LoadStageData()
     {
         stageData = new StageData { maxTime = maxTime };
-        StageData loadedData = jsonSave.LoadData();
+        StageData loadedData = jsonSave.LoadData(stageDropDown.stage);
 
         if (loadedData != null)
         {
@@ -105,6 +108,7 @@ public class EditorManager : MonoBehaviour
             }
         }
 
+        StageChange(stageDropDown.stage);
         UpdateTimelineScene();
     }
 
@@ -113,7 +117,7 @@ public class EditorManager : MonoBehaviour
     {
         if (!onClicked)
         {
-            jsonSave.SaveData(stageData);
+            jsonSave.SaveData(stageData, stageDropDown.stage);
         }
     }
 
@@ -122,6 +126,18 @@ public class EditorManager : MonoBehaviour
         HandleMakeInput();
         UpdateSlider();
         UpdateMaxTimeFromInput();
+    }
+
+    // 스테이지가 변경되었을때
+    public void StageChange(int stageIndex)
+    {
+        for(int i = 0; i< stageBG.Length; i++)
+        {
+            stageBG[i].SetActive(false);
+        }
+
+        stageBG[stageIndex].SetActive(true);
+        LoadStageData();
     }
 
     // 입력 필드의 최대 시간을 업데이트
@@ -141,9 +157,9 @@ public class EditorManager : MonoBehaviour
     {
         curTime = Mathf.FloorToInt(slider.value * maxTime);
 
-        if (curTime % 5 != 0)
+        if (curTime % 1 != 0)
         {
-            curTime = Mathf.RoundToInt(curTime / 5.0f) * 5;
+            curTime = Mathf.RoundToInt(curTime / 1f) * 1;
         }
 
         if (previousTime != curTime)

@@ -1,0 +1,17 @@
+{
+    "maxTime": 180,
+    "spawnDatas": [
+        {
+            "spawnTime": 0,
+            "enemyType": 0,
+            "startPos": {
+                "x": -3,
+                "y": 8
+            },
+            "endPos": {
+                "x": 6,
+                "y": 4
+            }
+        }
+    ]
+}
