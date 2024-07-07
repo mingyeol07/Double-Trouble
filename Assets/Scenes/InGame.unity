@@ -2327,7 +2327,6 @@ MonoBehaviour:
   stageObject:
   - {fileID: 351561506}
   - {fileID: 533633330}
-  testEnemy: {fileID: 0}
 --- !u!82 &431155336
 AudioSource:
   m_ObjectHideFlags: 0

@@ -481,7 +481,7 @@ MonoBehaviour:
   - {fileID: 3274675507708359448}
   - {fileID: 426572853510237787}
   getItemLight: {fileID: 2603765812706669593, guid: 0cfefabaac4b0ea49bdcccf1b53f02c3, type: 3}
-  shootDelayTime: 0.2
+  shootDelayTime: 0.15
   moveSpeed: 5
   unionTime: 10
   unionLight: {fileID: 3022427181656527256, guid: f266d969f1d4f9e4aa8b6059ed165133, type: 3}
