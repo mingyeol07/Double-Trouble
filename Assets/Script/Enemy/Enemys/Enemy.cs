@@ -1,9 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Timeline;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 /// <summary>
 /// Enemy들의 부모클래스
 /// </summary>
