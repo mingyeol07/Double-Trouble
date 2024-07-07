@@ -7,27 +7,31 @@ using UnityEngine;
 /// </summary>
 public class PlayerBeam : MonoBehaviour
 {
-    SpriteRenderer spriteRenderer;
     private BoxCollider2D coll;
+    private bool isCoroutine;
 
-    void Start()
+    void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         coll = GetComponent<BoxCollider2D>();
-        coll.enabled = true;
-        StartCoroutine(LateDestroy());
     }
 
-    private IEnumerator LateDestroy()
+    private void OnEnable()
     {
-        yield return new WaitForSeconds(0.1f);
-        coll.enabled = false;
-        float time = 1;
-        while (time > 0)
+        isCoroutine = true;
+        StartCoroutine(DelayColliderOnOff());
+    }
+
+    private IEnumerator DelayColliderOnOff()
+    {
+        while (isCoroutine)
         {
-            time -= Time.deltaTime;
-            spriteRenderer.color = new Color(1, 1, 1, time / 1);
-            yield return null;
+            coll.enabled = !coll.enabled;
+            yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    private void OnDisable()
+    {
+        isCoroutine = false;
     }
 }

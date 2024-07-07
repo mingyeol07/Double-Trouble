@@ -11,11 +11,17 @@ using UnityEngine;
 public class Rocket : Bullet
 {
     [SerializeField] private GameObject beam;
+    [SerializeField] private Transform beamPos;
 
-    protected override void Destroy()
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        base.Destroy();
-        GameObject go = Instantiate(beam);
-        go.transform.position = transform.position;
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            GameObject go = Instantiate(beam);
+            go.transform.position = beamPos.position;
+            Destroy(go, 0.9f);
+            
+            Destroy();
+        }
     }
 }

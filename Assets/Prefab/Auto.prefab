@@ -140,4 +140,4 @@ MonoBehaviour:
   damage: 1
   moveSpeed: 15
   destroyWaitTime: 5
-  rotationSpeed: 3
+  rotationSpeed: 7

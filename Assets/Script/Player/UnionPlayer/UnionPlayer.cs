@@ -20,12 +20,12 @@ public class UnionPlayer : MonoBehaviour
     [SerializeField] private GameObject unionLight;
     [SerializeField] private Animator engineAnim;
 
-    private bool weaponShoting;
+    private bool weaponShooting;
     private Rigidbody2D rigid;
     [SerializeField] private GameObject shield;
     [SerializeField] private Animator boostAnim;
 
-    private readonly int hashWeaponShot = Animator.StringToHash("Shot");
+    private readonly int hashWeaponShoot = Animator.StringToHash("Shoot");
     private readonly int hashBoosting = Animator.StringToHash("Boosting");
 
     private void Awake()
@@ -80,7 +80,6 @@ public class UnionPlayer : MonoBehaviour
         {
             miniPlayer[i].SetActive(true);
             miniPlayer[i].GetComponent<PlayerMini>().SetTime();
-            //miniPlayer[i].GetComponent<PlayerMini>().SetBulletType(BulletType)
         }
     }
 
@@ -95,10 +94,10 @@ public class UnionPlayer : MonoBehaviour
 
     private void ShootBullet()
     {
-        if (!weaponShoting)
+        if (!weaponShooting)
         {
-            weaponShoting = true;
-            engineAnim.SetTrigger(hashWeaponShot);
+            weaponShooting = true;
+            engineAnim.SetTrigger(hashWeaponShoot);
             StartCoroutine(AnimExit());
         }
     }
@@ -108,7 +107,7 @@ public class UnionPlayer : MonoBehaviour
         yield return new WaitForSeconds(0.01f);
         float time = engineAnim.GetCurrentAnimatorClipInfo(0).Length / 10;
         yield return new WaitForSeconds(time);
-        weaponShoting = false;
+        weaponShooting = false;
     }
 
     private void HpDown()
@@ -129,6 +128,24 @@ public class UnionPlayer : MonoBehaviour
 
     private void MoveInput()
     {
+        if (transform.position.x >= 9)
+        {
+            transform.position = new Vector2(9, transform.position.y);
+        }
+        else if (transform.position.x <= -9)
+        {
+            transform.position = new Vector2(-9, transform.position.y);
+        }
+
+        if (transform.position.y >= 5)
+        {
+            transform.position = new Vector2(transform.position.x, 5);
+        }
+        else if (transform.position.y <= -5)
+        {
+            transform.position = new Vector2(transform.position.x, -5);
+        }
+
         float h = Input.GetAxisRaw("HorizontalMultiple");
         float v = Input.GetAxisRaw("VerticalMultiple");
 

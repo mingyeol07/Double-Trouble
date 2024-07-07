@@ -23,6 +23,24 @@ public class TitlePlayer : MonoBehaviour
 
     private void MoveInput()
     {
+        if (transform.position.x >= 9)
+        {
+            transform.position = new Vector2(9, transform.position.y);
+        }
+        else if(transform.position.x <= -9)
+        {
+            transform.position = new Vector2(-9, transform.position.y);
+        }
+
+        if (transform.position.y >= 5)
+        {
+            transform.position = new Vector2(transform.position.x, 5);
+        }
+        else if (transform.position.y<= -5)
+        {
+            transform.position = new Vector2(transform.position.x, -5);
+        }
+
         float h = isLeft ? Input.GetAxisRaw("Horizontal") : Input.GetAxisRaw("HorizontalArrow");
         float v = isLeft ? Input.GetAxisRaw("Vertical") : Input.GetAxisRaw("VerticalArrow");
 

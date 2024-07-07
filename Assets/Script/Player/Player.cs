@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEditor.Build.Content;
 using UnityEditor.Rendering;
 using UnityEngine;
@@ -28,8 +29,27 @@ public abstract class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-       if(PlayerManager.Instance.isPlay) MoveInput();
+        if (transform.position.x >= 9)
+        {
+            transform.position = new Vector2(9, transform.position.y);
+        }
+        else if (transform.position.x <= -9)
+        {
+            transform.position = new Vector2(-9, transform.position.y);
+        }
+
+        if (transform.position.y >= 5)
+        {
+            transform.position = new Vector2(transform.position.x, 5);
+        }
+        else if (transform.position.y <= -5)
+        {
+            transform.position = new Vector2(transform.position.x, -5);
+        }
+
+        if (PlayerManager.Instance.isPlay) MoveInput();
     }
+
 
     protected abstract void MoveInput();
 

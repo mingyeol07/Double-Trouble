@@ -4,22 +4,9 @@ using UnityEngine;
 
 public class PlayerMini : MonoBehaviour
 {
-    [SerializeField] private bool isLeft;
     [SerializeField] private Transform shootTransform;
     [SerializeField] private float time;
-    private BulletType bulletType;
-
-    private void Awake()
-    {
-        if(isLeft)
-        {
-            bulletType = BulletType.LeftBullet;
-        }
-        else
-        {
-            bulletType = BulletType.RightBullet;
-        }
-    }
+    [SerializeField] private BulletType bulletType;
 
     private void Update()
     {

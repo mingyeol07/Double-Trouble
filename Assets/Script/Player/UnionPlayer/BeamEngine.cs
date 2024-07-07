@@ -6,13 +6,39 @@ using UnityEngine;
 /// </summary>
 public class BeamEngine : MonoBehaviour
 {
+    [SerializeField] private GameObject[] miniPlayer;
+    [SerializeField] private GameObject[] miniBeam;
     [SerializeField] private GameObject beam;
-    [SerializeField] private Transform shotTransform;
-    [SerializeField] private UnionPlayer unionPlayer;
+    private Collider2D beamColl;
 
-    private void ShotBeam()
+    private void Start()
     {
-        GameObject go = Instantiate(beam);
-        go.transform.position = shotTransform.position;
+        beamColl = beam.GetComponent<Collider2D>();
+    }
+
+    private void ShootBeam()
+    {
+        beam.SetActive(true);
+
+        for (int i = 0; i < miniPlayer.Length; i++)
+        {
+            if (miniPlayer[i].activeSelf)
+            {
+                miniBeam[i].SetActive(true);
+            }
+        }
+    }
+
+    private void OnDisable()
+    {
+        beam.SetActive(false) ;
+
+        for (int i = 0; i < miniPlayer.Length; i++)
+        {
+            if (miniPlayer[i].activeSelf)
+            {
+                miniBeam[i].gameObject.SetActive(false);
+            }
+        }
     }
 }

@@ -58,7 +58,7 @@ public abstract class Enemy : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Beam"))
         {
-            HpDown(100);
+            HpDown(2);
         }
 
         if(collision.gameObject.CompareTag("EnemyDestroy"))
