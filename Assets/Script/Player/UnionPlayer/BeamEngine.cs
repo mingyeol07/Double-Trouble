@@ -10,16 +10,18 @@ public class BeamEngine : MonoBehaviour
     [SerializeField] private GameObject[] miniBeam;
     [SerializeField] private GameObject beam;
     private Collider2D beamColl;
+    private UnionPlayer unionPlayer;
 
     private void Start()
     {
+        unionPlayer = GetComponentInParent<UnionPlayer>();
         beamColl = beam.GetComponent<Collider2D>();
     }
 
     private void ShootBeam()
     {
         beam.SetActive(true);
-
+        unionPlayer.ShootSound();
         for (int i = 0; i < miniPlayer.Length; i++)
         {
             if (miniPlayer[i].activeSelf)

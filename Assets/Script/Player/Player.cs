@@ -12,8 +12,8 @@ public abstract class Player : MonoBehaviour
     [SerializeField] protected GameObject[] miniPlayer;
     [SerializeField] private GameObject getItemLight;
 
-    [SerializeField] private int maxHp;
-    [SerializeField] private int curHp;
+    private const int maxHp = 3;
+    protected int curHp;
 
     [SerializeField] private List<Transform> shootPosition = new();
 
@@ -22,8 +22,16 @@ public abstract class Player : MonoBehaviour
 
     [SerializeField] private GameObject shield;
 
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip shootSound;
+    [SerializeField] private AudioClip destroySound;
+    [SerializeField] private AudioClip itemPickUpSound;
+
+    public bool isShield;
+
     protected virtual void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         curHp = maxHp;
     }
 
@@ -55,7 +63,7 @@ public abstract class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("EnemyBullet") || collision.gameObject.CompareTag("EnemyBeam"))
+        if ((collision.gameObject.CompareTag("EnemyBullet") || collision.gameObject.CompareTag("EnemyBeam")) && !isShield)
         {
             Camera.main.GetComponent<CameraShake>().StartShake(0.3f);
             HpDown();
@@ -63,6 +71,8 @@ public abstract class Player : MonoBehaviour
 
         if(collision.gameObject.CompareTag("Item"))
         {
+            audioSource.clip = itemPickUpSound;
+            audioSource.Play();
             Destroy(Instantiate(getItemLight, transform.position, Quaternion.identity), 1f);
             Destroy(collision.gameObject);
             SpawnMiniPlayer();
@@ -89,7 +99,10 @@ public abstract class Player : MonoBehaviour
 
     protected virtual void ShootBullet()
     {
-        for(int i = 0; i< shootPosition.Count; i++)
+        audioSource.clip = shootSound;
+        audioSource.Play();
+
+        for (int i = 0; i< shootPosition.Count; i++)
         {
             BulletPoolManager.Instance.Spawn(bulletType, shootPosition[i].position, 0);
         }
@@ -103,18 +116,10 @@ public abstract class Player : MonoBehaviour
         }
     }
 
-    private void HpDown()
+    public virtual void HpDown()
     {
-        curHp--;
-        if (curHp <= 0)
-        {
-            GameOver();
-        }
-    }
-
-    protected virtual void GameOver()
-    {
-
+        audioSource.clip = destroySound;
+        audioSource.Play();
     }
 
     protected virtual void OnEnable()
@@ -131,9 +136,9 @@ public abstract class Player : MonoBehaviour
     private IEnumerator Shield()
     {
         GameObject go = Instantiate(shield, transform);
-        GetComponent<Collider2D>().enabled = false;
+        isShield = true;
         yield return new WaitForSeconds(3f);
-        GetComponent<Collider2D>().enabled = true;
+        isShield = false;
         Destroy(go);
     }
 }

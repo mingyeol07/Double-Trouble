@@ -20,7 +20,7 @@ public class EnemyB : Enemy
         transform.Rotate(new Vector3(0, 0, rotationSpeed * Time.deltaTime));
     }
 
-    protected override void Shot()
+    protected override void Shoot()
     {
        for (int i = 0; i < shootTransform.Length; i++)
         {

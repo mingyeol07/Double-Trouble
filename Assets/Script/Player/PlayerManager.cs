@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 /// <summary>
@@ -9,8 +10,8 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance;
 
-    [SerializeField] private Player player_L;
-    [SerializeField] private Player player_R;
+    public Player player_L;
+    public Player player_R;
     private Transform player_L_Transform;
     private Transform player_R_Transform;
 
@@ -25,8 +26,12 @@ public class PlayerManager : MonoBehaviour
     public bool isPlay {  get; private set; }
     [SerializeField] private GameObject txt_Start;
     [SerializeField] private GameObject txt_Clear;
+    [SerializeField] private GameObject pnl_GameOver;
+    [SerializeField] private GameObject pnl_GameClear;
     private readonly float maxGauge = 100;
 
+    [SerializeField] private GameObject[] playerHpImage_L;
+    [SerializeField] private GameObject[] playerHpImage_R;
     [SerializeField] private GameObject[] unionPlayers;
     private GameObject unionpPlayer;
 
@@ -54,14 +59,9 @@ public class PlayerManager : MonoBehaviour
         txt_Start.SetActive(true);
     }
 
-    public void GameClear()
-    {
-        txt_Clear.SetActive(true);
-    }
-
     private void Update()
     {
-        if (L_Gauge >= maxGauge && R_Gauge >= maxGauge) 
+        if (L_Gauge >= maxGauge && R_Gauge >= maxGauge)
         {
             L_Gauge = 0;
             R_Gauge = 0;
@@ -69,8 +69,61 @@ public class PlayerManager : MonoBehaviour
             image_R_Gauge.fillAmount = R_Gauge;
             StartUnion();
         }
+
+        if(Input.GetKeyDown(KeyCode.F1))
+        {
+            player_L.isShield = !player_L.isShield;
+            player_R.isShield = !player_R.isShield;
+        }
     }
 
+    public void Stage1Clear()
+    {
+        txt_Clear.SetActive(true);
+    }
+
+    public void PlayerDestroy(int hp, bool isLeft)
+    {
+        if (hp <= 0)
+        {
+            SetActivePlayers(false);
+            GameOver();
+            return;
+        }
+
+        GameObject player;
+
+        if (isLeft)
+        {
+            player = player_L.gameObject;
+            playerHpImage_L[hp].SetActive(false);
+            player.transform.position = new Vector2(-4, -6);
+        }
+        else
+        {
+            player = player_R.gameObject;
+            playerHpImage_R[hp].SetActive(false);
+            player.transform.position = new Vector2(4, -6);
+        }
+
+        player.SetActive(false);
+
+        StartCoroutine(Respawn(player));
+    }
+
+    private IEnumerator Respawn(GameObject player)
+    {
+        yield return new WaitForSeconds(1f);
+
+        player.SetActive(true);
+        player.GetComponent<Animator>().SetTrigger("Start");
+    }
+
+    private void GameOver()
+    {
+        isPlay = false;
+        pnl_GameOver.SetActive(true);
+    }
 
     public void SetUnionPlayer(GameObject player)
     {
@@ -113,8 +166,8 @@ public class PlayerManager : MonoBehaviour
 
     public void StartUnion()
     {
-        player_L.enabled = false;
-        player_R.enabled = false;
+        player_L.isShield = true;
+        player_R.isShield = true;
 
         startUnionPosition_L = player_L_Transform.position;
         startUnionPosition_R = player_R_Transform.position;
@@ -162,8 +215,8 @@ public class PlayerManager : MonoBehaviour
 
     private IEnumerator ReturnPlayer()
     {
-        player_L.enabled = true;
-        player_R.enabled = true;
+        player_L.isShield = true;
+        player_R.isShield = true;
 
         float duration = 0.5f;
         float time = 0;

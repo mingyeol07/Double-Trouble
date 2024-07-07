@@ -1,7 +1,388 @@
 fileFormatVersion: 2
 guid: 434bcb3df6f040c42a11ccf627b414ed
-DefaultImporter:
+ScriptedImporter:
+  internalIDToNameTable: []
   externalObjects: {}
+  serializedVersion: 2
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: Nautolan Ship - Scout_Frame_0
+    originalName: 
+    pivot: {x: 0.5, y: -0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 173
+      width: 32
+      height: 28
+    spriteID: 794e25be7cb2df84b9780fd8ded7ab5c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 173}
+  - name: Nautolan Ship - Scout_Frame_1
+    originalName: 
+    pivot: {x: 0.5, y: -0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 209
+      width: 32
+      height: 28
+    spriteID: f507e3e032941ec4c8f8f1ca4a0a69b9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 209}
+  - name: Nautolan Ship - Scout_Frame_2
+    originalName: 
+    pivot: {x: 0.5, y: -0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 61
+      y: 72
+      width: 32
+      height: 28
+    spriteID: dd1ea9812ffa7dd40a6f3e672be48209
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 61, y: 72}
+  - name: Nautolan Ship - Scout_Frame_3
+    originalName: 
+    pivot: {x: 0.5, y: -0.4666667}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 135
+      width: 32
+      height: 30
+    spriteID: 1a34b3830f01b1548afce69838f9e97f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 135}
+  - name: Nautolan Ship - Scout_Frame_4
+    originalName: 
+    pivot: {x: 0.475, y: -0.4}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 92
+      width: 40
+      height: 35
+    spriteID: 46b55186c731ea64cbb8beb6db39135a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 92}
+  - name: Nautolan Ship - Scout_Frame_5
+    originalName: 
+    pivot: {x: 0.48979592, y: -0.2631579}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 49
+      height: 38
+    spriteID: fd41cdb4197c6294fa8bda49adb09b60
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: Nautolan Ship - Scout_Frame_6
+    originalName: 
+    pivot: {x: 0.5102041, y: -0.29411766}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 50
+      width: 49
+      height: 34
+    spriteID: 2554876180206d9469bcd3926e77876e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 50}
+  - name: Nautolan Ship - Scout_Frame_7
+    originalName: 
+    pivot: {x: 0.52, y: -0.31034482}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 61
+      y: 4
+      width: 50
+      height: 29
+    spriteID: 11c594cc2ed77c5439175fa3c29859d5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 61, y: 4}
+  - name: Nautolan Ship - Scout_Frame_8
+    originalName: 
+    pivot: {x: 0.53999996, y: -0.3478261}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 61
+      y: 41
+      width: 50
+      height: 23
+    spriteID: 5f4c9772825bbeb41a0fffd87a488c1b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 61, y: 41}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: 218476295
+    name: Nautolan Ship - Scout
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: Nautolan Ship - Scout_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 16
+        y: 14
+        width: 32
+        height: 28
+      spriteId: 794e25be7cb2df84b9780fd8ded7ab5c
+    - name: Nautolan Ship - Scout_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 16
+        y: 14
+        width: 32
+        height: 28
+      spriteId: f507e3e032941ec4c8f8f1ca4a0a69b9
+    - name: Nautolan Ship - Scout_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 16
+        y: 14
+        width: 32
+        height: 28
+      spriteId: dd1ea9812ffa7dd40a6f3e672be48209
+    - name: Nautolan Ship - Scout_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 16
+        y: 14
+        width: 32
+        height: 30
+      spriteId: 1a34b3830f01b1548afce69838f9e97f
+    - name: Nautolan Ship - Scout_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 13
+        y: 14
+        width: 40
+        height: 35
+      spriteId: 46b55186c731ea64cbb8beb6db39135a
+    - name: Nautolan Ship - Scout_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 8
+        y: 10
+        width: 49
+        height: 38
+      spriteId: fd41cdb4197c6294fa8bda49adb09b60
+    - name: Nautolan Ship - Scout_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 7
+        y: 10
+        width: 49
+        height: 34
+      spriteId: 2554876180206d9469bcd3926e77876e
+    - name: Nautolan Ship - Scout_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 6
+        y: 9
+        width: 50
+        height: 29
+      spriteId: 11c594cc2ed77c5439175fa3c29859d5
+    - name: Nautolan Ship - Scout_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 5
+        y: 8
+        width: 50
+        height: 23
+      spriteId: 5f4c9772825bbeb41a0fffd87a488c1b
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 64, y: 64}

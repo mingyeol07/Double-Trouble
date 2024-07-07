@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 /// <summary>
 /// 합체한 플레이어
 /// </summary>
 public class UnionPlayer : MonoBehaviour
 {
     [SerializeField] private int maxHp;
-    [SerializeField] private int curHp;
 
     [SerializeField] protected GameObject[] miniPlayer;
     [SerializeField] private GameObject getItemLight;
@@ -18,12 +16,18 @@ public class UnionPlayer : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private float unionTime;
     [SerializeField] private GameObject unionLight;
+    [SerializeField] private GameObject shield;
     [SerializeField] private Animator engineAnim;
+    [SerializeField] private Animator boostAnim;
 
     private bool weaponShooting;
+    private bool isSheild;
     private Rigidbody2D rigid;
-    [SerializeField] private GameObject shield;
-    [SerializeField] private Animator boostAnim;
+    [SerializeField] private AudioClip lightSound;
+    [SerializeField] private AudioClip shootSound;
+    [SerializeField] private AudioClip destroySound;
+    [SerializeField] private AudioClip itemPickUpSound;
+    private AudioSource audioSource;
 
     private readonly int hashWeaponShoot = Animator.StringToHash("Shoot");
     private readonly int hashBoosting = Animator.StringToHash("Boosting");
@@ -31,27 +35,42 @@ public class UnionPlayer : MonoBehaviour
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     protected virtual void Start()
     {
+        PlayerManager.Instance.SetUnionPlayer(gameObject);
+
+        OnLight();
+        StartCoroutine(Co_StartUnionTime());
+        StartCoroutine(ShootDelay());
         StartCoroutine(Shield());
-        curHp = maxHp;
+    }
+
+    private void OnLight()
+    {
+        audioSource.clip = lightSound;
+        audioSource.Play();
+
         GameObject go = Instantiate(unionLight, transform);
         go.transform.position = transform.position;
         Destroy(go, 1);
-        PlayerManager.Instance.SetUnionPlayer(gameObject);
-        StartCoroutine(Co_StartUnionTime());
-        StartCoroutine(ShootDelay());
+    }
+
+    public void ShootSound()
+    {
+        audioSource.clip = shootSound;
+        audioSource.Play();
     }
 
     private IEnumerator Shield()
     {
         GameObject go = Instantiate(shield, transform);
-        GetComponent<Collider2D>().enabled = false;
+        isSheild = true;
         yield return new WaitForSeconds(3f);
+        isSheild = false;
         Destroy(go);
-        GetComponent<Collider2D>().enabled = true;
     }
 
     protected virtual void FixedUpdate()
@@ -61,13 +80,16 @@ public class UnionPlayer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("EnemyBullet") || collision.gameObject.CompareTag("EnemyBeam"))
+        if ((collision.gameObject.CompareTag("EnemyBullet") || collision.gameObject.CompareTag("EnemyBeam"))&& !isSheild)
         {
-            HpDown();
+            ExitUnion();
         }
 
         if (collision.gameObject.CompareTag("Item"))
         {
+            audioSource.clip = itemPickUpSound;
+            audioSource.Play();
+
             Destroy(Instantiate(getItemLight, transform.position, Quaternion.identity), 1f);
             Destroy(collision.gameObject);
             SpawnMiniPlayer();
@@ -110,17 +132,12 @@ public class UnionPlayer : MonoBehaviour
         weaponShooting = false;
     }
 
-    private void HpDown()
+    private void ExitUnion()
     {
-        Camera.main.GetComponent<CameraShake>().StartShake(0.3f);
-        {
-            if (curHp-- <= 0)
-            GameOver();
-        }
-    }
+        audioSource.clip = destroySound;
+        audioSource.Play();
 
-    private void GameOver()
-    {
+        Camera.main.GetComponent<CameraShake>().StartShake(0.3f);
         StopAllCoroutines();
         PlayerManager.Instance.ExitUnion();
         Destroy(this.gameObject);

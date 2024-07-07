@@ -1,7 +1,556 @@
 fileFormatVersion: 2
 guid: 78a1eaca8f95506479a8a434c5db2edd
-DefaultImporter:
+ScriptedImporter:
+  internalIDToNameTable: []
   externalObjects: {}
+  serializedVersion: 2
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: Pickup Icon - Engines - Base Engine_Frame_0
+    originalName: 
+    pivot: {x: 0.5, y: -0.4117647}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 24
+      height: 17
+    spriteID: d2f7516d1d65c7c4dab3aea68a3df148
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: Pickup Icon - Engines - Base Engine_Frame_1
+    originalName: 
+    pivot: {x: 0.5, y: -0.4117647}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 36
+      y: 4
+      width: 24
+      height: 17
+    spriteID: 639dfd5b0ac2a2e44b726472ba6995ff
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 36, y: 4}
+  - name: Pickup Icon - Engines - Base Engine_Frame_2
+    originalName: 
+    pivot: {x: 0.5, y: -0.4117647}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 68
+      y: 4
+      width: 24
+      height: 17
+    spriteID: d5d7892ec94c88f43ab5d29952054a10
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 68, y: 4}
+  - name: Pickup Icon - Engines - Base Engine_Frame_3
+    originalName: 
+    pivot: {x: 0.5, y: -0.4117647}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 100
+      y: 4
+      width: 24
+      height: 17
+    spriteID: 783e28fd8d4a09143ad8dbf6d51981d2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 100, y: 4}
+  - name: Pickup Icon - Engines - Base Engine_Frame_4
+    originalName: 
+    pivot: {x: 0.5, y: -0.4117647}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 29
+      width: 24
+      height: 17
+    spriteID: af4b8e6b0dcc31c4cafa13150a77e586
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 29}
+  - name: Pickup Icon - Engines - Base Engine_Frame_5
+    originalName: 
+    pivot: {x: 0.5, y: -0.4117647}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 36
+      y: 29
+      width: 24
+      height: 17
+    spriteID: 4fb47b08c9097884ebab93a1683770ce
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 36, y: 29}
+  - name: Pickup Icon - Engines - Base Engine_Frame_6
+    originalName: 
+    pivot: {x: 0.5, y: -0.4117647}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 68
+      y: 29
+      width: 24
+      height: 17
+    spriteID: 954a34da032fd5447a30103d05d44666
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 68, y: 29}
+  - name: Pickup Icon - Engines - Base Engine_Frame_7
+    originalName: 
+    pivot: {x: 0.5, y: -0.4117647}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 100
+      y: 29
+      width: 24
+      height: 17
+    spriteID: 968db0e05e318a140a64822ddd5bcfa2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 100, y: 29}
+  - name: Pickup Icon - Engines - Base Engine_Frame_8
+    originalName: 
+    pivot: {x: 0.5, y: -0.4117647}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 54
+      width: 24
+      height: 17
+    spriteID: 0885c92cb050dd24a8133b0e2f4af8b0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 54}
+  - name: Pickup Icon - Engines - Base Engine_Frame_9
+    originalName: 
+    pivot: {x: 0.5, y: -0.4117647}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 36
+      y: 54
+      width: 24
+      height: 17
+    spriteID: c95a69e8d8cd5994f9e844a558af08b1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 36, y: 54}
+  - name: Pickup Icon - Engines - Base Engine_Frame_10
+    originalName: 
+    pivot: {x: 0.5, y: -0.4117647}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 68
+      y: 54
+      width: 24
+      height: 17
+    spriteID: 5e6947947c4101f4cbe7f113a5beb22e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 68, y: 54}
+  - name: Pickup Icon - Engines - Base Engine_Frame_11
+    originalName: 
+    pivot: {x: 0.5, y: -0.4117647}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 100
+      y: 54
+      width: 24
+      height: 17
+    spriteID: 9ac620137204c2349a834e161d24152c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 100, y: 54}
+  - name: Pickup Icon - Engines - Base Engine_Frame_12
+    originalName: 
+    pivot: {x: 0.5, y: -0.4117647}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 79
+      width: 24
+      height: 17
+    spriteID: 62486ce2a45d59c429390c30350649ec
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 79}
+  - name: Pickup Icon - Engines - Base Engine_Frame_13
+    originalName: 
+    pivot: {x: 0.5, y: -0.4117647}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 36
+      y: 79
+      width: 24
+      height: 17
+    spriteID: 3b9a22a2aec365d4e87fe3a4376328c5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 36, y: 79}
+  - name: Pickup Icon - Engines - Base Engine_Frame_14
+    originalName: 
+    pivot: {x: 0.5, y: -0.4117647}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 68
+      y: 79
+      width: 24
+      height: 17
+    spriteID: d923dd4417963454cb39d040c9ec42ae
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 68, y: 79}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: 1865267349
+    name: Pickup Icon - Engines - Base Engine
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: Pickup Icon - Engines - Base Engine_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 4
+        y: 7
+        width: 24
+        height: 17
+      spriteId: d2f7516d1d65c7c4dab3aea68a3df148
+    - name: Pickup Icon - Engines - Base Engine_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 4
+        y: 7
+        width: 24
+        height: 17
+      spriteId: 639dfd5b0ac2a2e44b726472ba6995ff
+    - name: Pickup Icon - Engines - Base Engine_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 4
+        y: 7
+        width: 24
+        height: 17
+      spriteId: d5d7892ec94c88f43ab5d29952054a10
+    - name: Pickup Icon - Engines - Base Engine_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 4
+        y: 7
+        width: 24
+        height: 17
+      spriteId: 783e28fd8d4a09143ad8dbf6d51981d2
+    - name: Pickup Icon - Engines - Base Engine_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 4
+        y: 7
+        width: 24
+        height: 17
+      spriteId: af4b8e6b0dcc31c4cafa13150a77e586
+    - name: Pickup Icon - Engines - Base Engine_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 4
+        y: 7
+        width: 24
+        height: 17
+      spriteId: 4fb47b08c9097884ebab93a1683770ce
+    - name: Pickup Icon - Engines - Base Engine_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 4
+        y: 7
+        width: 24
+        height: 17
+      spriteId: 954a34da032fd5447a30103d05d44666
+    - name: Pickup Icon - Engines - Base Engine_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 4
+        y: 7
+        width: 24
+        height: 17
+      spriteId: 968db0e05e318a140a64822ddd5bcfa2
+    - name: Pickup Icon - Engines - Base Engine_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 4
+        y: 7
+        width: 24
+        height: 17
+      spriteId: 0885c92cb050dd24a8133b0e2f4af8b0
+    - name: Pickup Icon - Engines - Base Engine_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 4
+        y: 7
+        width: 24
+        height: 17
+      spriteId: c95a69e8d8cd5994f9e844a558af08b1
+    - name: Pickup Icon - Engines - Base Engine_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 4
+        y: 7
+        width: 24
+        height: 17
+      spriteId: 5e6947947c4101f4cbe7f113a5beb22e
+    - name: Pickup Icon - Engines - Base Engine_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 4
+        y: 7
+        width: 24
+        height: 17
+      spriteId: 9ac620137204c2349a834e161d24152c
+    - name: Pickup Icon - Engines - Base Engine_Frame_12
+      frameIndex: 12
+      cellRect:
+        x: 4
+        y: 7
+        width: 24
+        height: 17
+      spriteId: 62486ce2a45d59c429390c30350649ec
+    - name: Pickup Icon - Engines - Base Engine_Frame_13
+      frameIndex: 13
+      cellRect:
+        x: 4
+        y: 7
+        width: 24
+        height: 17
+      spriteId: 3b9a22a2aec365d4e87fe3a4376328c5
+    - name: Pickup Icon - Engines - Base Engine_Frame_14
+      frameIndex: 14
+      cellRect:
+        x: 4
+        y: 7
+        width: 24
+        height: 17
+      spriteId: d923dd4417963454cb39d040c9ec42ae
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 32, y: 32}

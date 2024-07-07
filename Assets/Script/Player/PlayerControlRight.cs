@@ -32,4 +32,10 @@ public class PlayerControlRight : Player
             engineAnimator.SetBool(hashBoosting, false);
         }
     }
+
+    public override void HpDown()
+    {
+        base.HpDown();
+        PlayerManager.Instance.PlayerDestroy(--curHp, false);
+    }
 }

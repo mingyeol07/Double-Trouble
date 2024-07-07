@@ -24,7 +24,7 @@ public class EnemyA : Enemy
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, angle - 90), Time.deltaTime * rotationSpeed);
     }
 
-    protected override void Shot()
+    protected override void Shoot()
     {
         StartCoroutine(Co_DoubleShot());
     }
@@ -32,7 +32,6 @@ public class EnemyA : Enemy
     private IEnumerator Co_DoubleShot()
     {
         BulletPoolManager.Instance.Spawn(BulletType.EnemyBullet, shootTransform.position, angle +90);
-        yield return new WaitForSeconds(0.2f);
-        BulletPoolManager.Instance.Spawn(BulletType.EnemyBullet, shootTransform.position, angle +90);
+        yield return null;
     }
 }

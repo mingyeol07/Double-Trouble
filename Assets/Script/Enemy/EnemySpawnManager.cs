@@ -9,16 +9,19 @@ using UnityEngine;
 public class EnemySpawnManager : MonoBehaviour
 {
     private int gameTime;
-    private int stageIndex;
+    [SerializeField] private int stageIndex;
     private StageData stageData;
     private StageJsonSave jsonSave;
     private StageBackGroundManager backGroundManager;
+    [SerializeField] private GameObject bossA;
+    [SerializeField] private GameObject bossB;
 
     private void Start()
     {
+        backGroundManager = GetComponent<StageBackGroundManager>();
         jsonSave = GetComponent<StageJsonSave>();
         stageData = jsonSave.LoadData(stageIndex);
-
+        backGroundManager.SetStageBackGround(stageIndex);
         gameTime = 0;
         StartCoroutine(UpdateTime());
     }
@@ -49,9 +52,23 @@ public class EnemySpawnManager : MonoBehaviour
         Vector2 startPos = new Vector2(spawnData.startPos.x, spawnData.startPos.y);
         Vector2 endPos = new Vector2(spawnData.endPos.x, spawnData.endPos.y);
 
-        GameObject enemy = EnemyPoolManager.Instance.Spawn(spawnData.enemyType);
-        enemy.transform.position = startPos;
+        GameObject enemy = null;
 
-       enemy.GetComponent<Enemy>().StartMove(1, startPos, endPos);
+        if (spawnData.enemyType == EnemyType.EnemyBossA)
+        {
+            enemy = bossA;
+        }
+       else if(spawnData.enemyType == EnemyType.EnemyBossB)
+        {
+            enemy = bossB;
+        }
+        else
+        {
+            enemy = EnemyPoolManager.Instance.Spawn(spawnData.enemyType);
+            enemy.transform.position = startPos;
+        }
+
+        enemy.SetActive(true);
+        enemy.GetComponent<Enemy>().StartMove(1, startPos, endPos);
     }
 }

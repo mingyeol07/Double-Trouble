@@ -13,6 +13,7 @@ public class EnemyC : Enemy
     private readonly float rotationSpeed = 6f;
     private bool isBeam;
     [SerializeField] private GameObject beam;
+    [SerializeField] private GameObject beamWarning;
 
     protected override void Update()
     {
@@ -29,16 +30,31 @@ public class EnemyC : Enemy
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, angle - 90), Time.deltaTime * rotationSpeed);
     }
 
-    protected override void Shot()
+    protected override void Shoot()
     {
-        beam.SetActive(true);
         StartCoroutine(ShootBeam());
     }
 
     private IEnumerator ShootBeam()
     {
         isBeam = true;
+        beamWarning.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        beamWarning.SetActive(false);
+
         yield return new WaitForSeconds(1f);
+
+        beam.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
         isBeam = false;
+    }
+
+    private IEnumerator BeamWarning()
+    {
+        yield return null;
     }
 }

@@ -22,12 +22,16 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] private Sprite defaultSprite;
     private bool onMoveDown;
 
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip destorySound;
+    [SerializeField] private AudioClip shootSound;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         collider = GetComponent<Collider2D>();
         animator = GetComponent<Animator>();
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     protected virtual void Update()
@@ -80,6 +84,8 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual IEnumerator Co_Destroy()
     {
+        audioSource.clip = destorySound;
+        audioSource.Play();
         animator.SetTrigger(hashDestroy);
         collider.enabled = false;
         onMoveDown = false;
@@ -124,14 +130,18 @@ public abstract class Enemy : MonoBehaviour
         StartShoot();
     }
         
-    protected abstract void Shot();
+    protected abstract void Shoot();
 
-    private IEnumerator Co_Shot()
+    protected IEnumerator Co_Shot()
     {
         onMoveDown = true;
         while (true)
         {
-            Shot();
+            if (!PlayerManager.Instance.isPlay) break;
+
+            audioSource.clip = shootSound;
+            audioSource.Play();
+            Shoot();
             yield return new WaitForSeconds(shootCoolTime);
         }
     }

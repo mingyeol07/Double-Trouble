@@ -8,6 +8,12 @@ public class BossBarrier : MonoBehaviour
     private bool onLeftBarrierRing;
     private bool onRightBarrierRing;
 
+    private void Update()
+    {
+        Debug.Log(GetOnLeftBarriering());
+        Debug.Log(GetOnRightRarriering());
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -27,8 +33,14 @@ public class BossBarrier : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            onLeftBarrierRing = false;
-            onRightBarrierRing = false;
+            if (isLeftBarrier)
+            {
+                onLeftBarrierRing = false;
+            }
+            else
+            {
+                onRightBarrierRing = false;
+            }
         }
     }
 

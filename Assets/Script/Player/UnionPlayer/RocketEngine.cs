@@ -9,9 +9,12 @@ public class RocketEngine : MonoBehaviour
     [SerializeField] private GameObject[] miniPlayer;
     [SerializeField] private Transform shotLeftTransform;
     [SerializeField] private Transform shotRightTransform;
+    private UnionPlayer unionPlayer;
 
     private void Start()
     {
+        unionPlayer = GetComponentInParent<UnionPlayer>();
+
         for (int i = 0; i < miniPlayer.Length; i++)
         {
             miniPlayer[i].GetComponent<PlayerMini>().SetBulletType(BulletType.Rocket);
@@ -20,11 +23,15 @@ public class RocketEngine : MonoBehaviour
 
     private void ShootLeftRocket()
     {
+        unionPlayer.ShootSound();
+
         BulletPoolManager.Instance.Spawn(BulletType.Rocket, shotLeftTransform.position, 0);
     }
 
     private void ShootRightRocket()
     {
+        unionPlayer.ShootSound();
+
         BulletPoolManager.Instance.Spawn(BulletType.Rocket, shotRightTransform.position, 0);
 
         for (int i = 0; i < miniPlayer.Length; i++)

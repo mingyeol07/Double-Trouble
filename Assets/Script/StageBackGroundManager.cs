@@ -8,6 +8,16 @@ using UnityEngine;
 public class StageBackGroundManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] stageObject;
+    private AudioSource bgmAudio;
+
+    private void Awake()
+    {
+        bgmAudio = GetComponent<AudioSource>();
+    }
+    private void Start()
+    {
+        bgmAudio.Play();
+    }
 
     public void SetStageBackGround(int stageIndex)
     {

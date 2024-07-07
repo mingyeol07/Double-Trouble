@@ -11,7 +11,7 @@ public class EnemyD : Enemy
 {
     [SerializeField] private Transform[] shootTransform;
 
-    protected override void Shot()
+    protected override void Shoot()
     {
         for (int i = 0; i < shootTransform.Length; i++)
         {
