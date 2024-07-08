@@ -1,8 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
-using UnityEditor.Build.Content;
-using UnityEditor.Rendering;
 using UnityEngine;
 /// <summary>
 /// 플레이어 부모 클래스

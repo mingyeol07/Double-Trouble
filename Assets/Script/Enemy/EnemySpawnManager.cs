@@ -56,11 +56,11 @@ public class EnemySpawnManager : MonoBehaviour
 
         if (spawnData.enemyType == EnemyType.EnemyBossA)
         {
-            enemy = bossA;
+            enemy = Instantiate(bossA);
         }
-       else if(spawnData.enemyType == EnemyType.EnemyBossB)
+        else if(spawnData.enemyType == EnemyType.EnemyBossB)
         {
-            enemy = bossB;
+            enemy = Instantiate(bossB);
         }
         else
         {
