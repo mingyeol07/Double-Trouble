@@ -163,6 +163,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 5
   damage: 1
-  moveSpeed: 30
+  moveSpeed: 15
   destroyWaitTime: 5
-  rotationSpeed: 30
+  rotationSpeed: 15

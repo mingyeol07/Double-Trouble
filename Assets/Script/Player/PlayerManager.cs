@@ -84,13 +84,6 @@ public class PlayerManager : MonoBehaviour
 
     public void PlayerDestroy(int hp, bool isLeft)
     {
-        if (hp <= 0)
-        {
-            SetActivePlayers(false);
-            GameOver();
-            return;
-        }
-
         GameObject player;
 
         if (isLeft)
@@ -106,8 +99,14 @@ public class PlayerManager : MonoBehaviour
             player.transform.position = new Vector2(4, -6);
         }
 
-        player.SetActive(false);
+        if (hp <= 0)
+        {
+            SetActivePlayers(false);
+            GameOver();
+            return;
+        }
 
+        player.SetActive(false);
         StartCoroutine(Respawn(player));
     }
 
