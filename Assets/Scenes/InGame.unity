@@ -1150,6 +1150,7 @@ MonoBehaviour:
   txt_Clear: {fileID: 246783889}
   pnl_GameOver: {fileID: 1188836511}
   pnl_GameClear: {fileID: 1275274769}
+  maxGauge: 100
   playerHpImage_L:
   - {fileID: 1863614099}
   - {fileID: 1351934099}
@@ -2327,6 +2328,8 @@ MonoBehaviour:
   stageObject:
   - {fileID: 351561506}
   - {fileID: 533633330}
+  isTesting: 1
+  enemy: {fileID: 264546741681955066, guid: efa450d8ecb52c1468a978ef4714b422, type: 3}
 --- !u!82 &431155336
 AudioSource:
   m_ObjectHideFlags: 0

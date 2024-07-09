@@ -16,10 +16,6 @@ public class EnemyPoolManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-    }
-
-    private void Start()
-    {
         Initialization();
     }
 

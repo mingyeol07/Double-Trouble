@@ -28,11 +28,8 @@ public class EnemyBossA : Enemy
 
     protected IEnumerator Co_Shoot()
     {
-        while (true)
-        {
-            Shoot();
-            yield return new WaitForSeconds(3);
-        }
+        Shoot();
+        yield return null;
     }
 
 
@@ -49,13 +46,19 @@ public class EnemyBossA : Enemy
         {
             case 0:
                 StartCoroutine(CircleShoot());
+                yield return new WaitForSeconds(3f);
+                Shoot();
                 break;
             case 1:
                 StartCoroutine(LeftShoot());
                 StartCoroutine(RightShoot());
+                yield return new WaitForSeconds(3f);
+                Shoot();
                 break;
             case 2:
                 StartCoroutine(LazerShoot());
+                yield return new WaitForSeconds(3f);
+                Shoot();
                 break;
         }
 
@@ -75,15 +78,6 @@ public class EnemyBossA : Enemy
 
     private IEnumerator CircleShoot()
     {
-        for (int i = 7; i < 360; i += 13)
-        {
-
-            BulletPoolManager.Instance.Spawn(BulletType.EnemyBullet, transform.position, i);
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(1f);
-
         for (int i = 0; i < 360; i += 13)
         {
             BulletPoolManager.Instance.Spawn(BulletType.EnemyBullet, transform.position, i);
@@ -92,7 +86,7 @@ public class EnemyBossA : Enemy
 
         yield return new WaitForSeconds(1f);
 
-        for (int i = 7; i < 360; i += 13)
+        for (int i = 6; i < 366; i += 13)
         {
             BulletPoolManager.Instance.Spawn(BulletType.EnemyBullet, transform.position, i);
             yield return null;

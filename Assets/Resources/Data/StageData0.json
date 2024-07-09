@@ -1,5 +1,5 @@
 {
-    "maxTime": 180,
+    "maxTime": 130,
     "spawnDatas": [
         {
             "spawnTime": 6,
@@ -814,6 +814,42 @@
             },
             "endPos": {
                 "x": 0,
+                "y": 3
+            }
+        },
+        {
+            "spawnTime": 122,
+            "enemyType": 3,
+            "startPos": {
+                "x": -6,
+                "y": 8
+            },
+            "endPos": {
+                "x": -6,
+                "y": 4
+            }
+        },
+        {
+            "spawnTime": 123,
+            "enemyType": 3,
+            "startPos": {
+                "x": 0,
+                "y": 9
+            },
+            "endPos": {
+                "x": 0,
+                "y": 4
+            }
+        },
+        {
+            "spawnTime": 124,
+            "enemyType": 3,
+            "startPos": {
+                "x": 6,
+                "y": 9
+            },
+            "endPos": {
+                "x": 6,
                 "y": 3
             }
         }

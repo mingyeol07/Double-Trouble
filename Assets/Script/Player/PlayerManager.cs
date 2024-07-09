@@ -28,7 +28,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private GameObject txt_Clear;
     [SerializeField] private GameObject pnl_GameOver;
     [SerializeField] private GameObject pnl_GameClear;
-    private readonly float maxGauge = 100;
+    [SerializeField] private int maxGauge = 100;
 
     [SerializeField] private GameObject[] playerHpImage_L;
     [SerializeField] private GameObject[] playerHpImage_R;
@@ -241,19 +241,26 @@ public class PlayerManager : MonoBehaviour
     {
         SetActivePlayers(false);
         int randomIndex = Random.Range(0, 4);
+        Debug.Log(randomIndex);
         GameObject randomUnionPlayer = Instantiate(unionPlayers[randomIndex]);
         randomUnionPlayer.transform.position = player_L_Transform.position;
     }
 
     public void SetLeftPlayerGaugePlus()
     {
-        L_Gauge++;
-        image_L_Gauge.fillAmount = (float)L_Gauge / maxGauge;
+        if(player_L.gameObject.activeSelf)
+        {
+            L_Gauge++;
+            image_L_Gauge.fillAmount = L_Gauge / maxGauge;
+        }
     }
 
     public void SetRightPlayerGaugePlus()
     {
-        R_Gauge++;
-        image_R_Gauge.fillAmount = (float)R_Gauge / maxGauge;
+        if (player_R.gameObject.activeSelf)
+        {
+            R_Gauge++;
+            image_R_Gauge.fillAmount = R_Gauge / maxGauge;
+        }
     }
 }

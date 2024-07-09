@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using static EnemySpawnData;
@@ -17,9 +16,7 @@ public class StageData
         spawnDatas = new List<EnemySpawnData>();
     }
 }
-/// <summary>
-/// 슬라이더를 조절하고, Editer의 전체적인 UI를 관리하는 스크립트
-/// </summary>
+
 public class EditorManager : MonoBehaviour
 {
     [SerializeField] private EditorSetEnemyDropDown enemyDropDown;
@@ -63,7 +60,6 @@ public class EditorManager : MonoBehaviour
     {
         SetUp();
         AddButtonListeners();
-        LoadStageData();
         StageChange(stageDropDown.stage);
         stageData.maxTime = maxTime;
     }
@@ -73,9 +69,28 @@ public class EditorManager : MonoBehaviour
         HandleMakeInput();
         UpdateSlider();
         UpdateMaxTimeFromInput();
+        ChangeTimeToInput();
     }
 
-    // 초기 설정
+    private void ChangeTimeToInput()
+    {
+        float changeAmount = 1f / maxTime;
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            slider.value = Mathf.Clamp(slider.value - changeAmount, 0, 1);
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            slider.value = Mathf.Clamp(slider.value + changeAmount, 0, 1);
+        }
+
+        if(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+        {
+            slider.value += Time.deltaTime * Input.GetAxis("HorizontalArrow");
+        }
+    }
+
     private void SetUp()
     {
         jsonSave = GetComponent<StageJsonSave>();
@@ -94,7 +109,6 @@ public class EditorManager : MonoBehaviour
         }
     }
 
-    // 버튼 리스너 추가
     private void AddButtonListeners()
     {
         btn_making.onClick.AddListener(ToggleMakeMode);
@@ -102,7 +116,6 @@ public class EditorManager : MonoBehaviour
         btn_deleteEvent.onClick.AddListener(DeleteCurrentTimeEnemies);
     }
 
-    // 데이터 로드
     private void LoadStageData()
     {
         stageData = new StageData { maxTime = maxTime };
@@ -119,19 +132,17 @@ public class EditorManager : MonoBehaviour
         UpdateTimelineScene();
     }
 
-    // 데이터 저장
     private void SaveData()
     {
-        if (!onClicked)
+        if (!isMaking)
         {
             jsonSave.SaveData(stageData, stageDropDown.stage);
         }
     }
 
-    // 스테이지가 변경되었을때
     public void StageChange(int stageIndex)
     {
-        for(int i = 0; i< stageBG.Length; i++)
+        for (int i = 0; i < stageBG.Length; i++)
         {
             stageBG[i].SetActive(false);
         }
@@ -140,7 +151,6 @@ public class EditorManager : MonoBehaviour
         LoadStageData();
     }
 
-    // 입력 필드의 최대 시간을 업데이트
     private void UpdateMaxTimeFromInput()
     {
         string currentInput = inputField_maxTime.text;
@@ -149,18 +159,14 @@ public class EditorManager : MonoBehaviour
         {
             maxTime = changeTime;
             previousInput = currentInput;
+            slider.maxValue = maxTime;
+            UpdateSlider();
         }
     }
 
-    // 슬라이더 업데이트
     private void UpdateSlider()
     {
-        curTime = Mathf.FloorToInt(slider.value * maxTime);
-
-        if (curTime % 1 != 0)
-        {
-            curTime = Mathf.RoundToInt(curTime / 1f) * 1;
-        }
+        curTime = Mathf.RoundToInt(slider.value * maxTime);
 
         if (previousTime != curTime)
         {
@@ -172,7 +178,6 @@ public class EditorManager : MonoBehaviour
         slider.value = (float)curTime / maxTime;
     }
 
-    // 타임라인 씬 업데이트
     private void UpdateTimelineScene()
     {
         foreach (var enemy in enemys)
@@ -196,7 +201,6 @@ public class EditorManager : MonoBehaviour
         }
     }
 
-    // 사용 가능한 적 프리팹을 반환
     private GameObject GetAvailableEnemyPrefab()
     {
         foreach (var enemy in enemys)
@@ -211,7 +215,6 @@ public class EditorManager : MonoBehaviour
         return null;
     }
 
-    // 생성 모드 입력 처리
     private void HandleMakeInput()
     {
         if (Input.GetKeyDown(KeyCode.Q) && isMaking && !onClicked)
@@ -224,14 +227,12 @@ public class EditorManager : MonoBehaviour
         }
     }
 
-    // 마우스 위치 반환
     private Vector2Int GetMousePosition()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         return new Vector2Int(Mathf.RoundToInt(mousePos.x), Mathf.RoundToInt(mousePos.y));
     }
 
-    // 생성 시작
     private void StartMake()
     {
         onClicked = true;
@@ -240,7 +241,6 @@ public class EditorManager : MonoBehaviour
         CreateEnemyInstance(mousePos);
     }
 
-    // 적 인스턴스 생성
     private void CreateEnemyInstance(Vector2Int spawnPos)
     {
         enemySpawnData = new EnemySpawnData
@@ -259,7 +259,6 @@ public class EditorManager : MonoBehaviour
         lineRendererClone.SetPosition(1, (Vector2)spawnPos);
     }
 
-    // 생성 종료
     private void EndMake()
     {
         onClicked = false;
@@ -268,7 +267,6 @@ public class EditorManager : MonoBehaviour
         SaveEnemyInstance(mousePos);
     }
 
-    // 적 인스턴스 저장
     private void SaveEnemyInstance(Vector2Int endPos)
     {
         lineRendererClone.SetPosition(1, (Vector2)endPos);
@@ -280,12 +278,11 @@ public class EditorManager : MonoBehaviour
         ToggleMakeMode();
     }
 
-    // 현재 시간의 적 제거
     private void DeleteCurrentTimeEnemies()
     {
-        for (int i = 0; i < enemys.Count; i++)
+        foreach (var enemy in enemys)
         {
-            enemys[i].SetActive(false);
+            enemy.SetActive(false);
         }
 
         stageData.spawnDatas.RemoveAll(spawnData => spawnData.spawnTime == curTime);
