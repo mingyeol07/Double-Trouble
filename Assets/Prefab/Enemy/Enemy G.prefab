@@ -262,3 +262,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1420e14a8bc17784bbc12a69b87baf71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 7
+  maxHp: 30
+  curHp: 0
+  shootCoolTime: 10
+  moveDownSpeed: 0
+  defaultSprite: {fileID: 7272645191040422469, guid: 07000c82ee15ffa4c9ca8762249383ac, type: 3}
+  destorySound: {fileID: 8300000, guid: b59b5a211cd5eda40bf1691f5e069959, type: 3}
+  shootSound: {fileID: 0}

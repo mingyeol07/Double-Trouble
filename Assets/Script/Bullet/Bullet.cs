@@ -37,9 +37,14 @@ public class Bullet : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") && type != BulletType.EnemyBullet)
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            if(type == BulletType.LeftBullet)
+            if (type == BulletType.EnemyBullet || type == BulletType.EnemyBullet2 || type == BulletType.EnemyBulletBoom)
+            {
+                return;
+            }
+
+                if (type == BulletType.LeftBullet)
             {
                 PlayerManager.Instance.SetLeftPlayerGaugePlus();
                 Destroy();
@@ -48,10 +53,6 @@ public class Bullet : MonoBehaviour
             {
                 PlayerManager.Instance.SetRightPlayerGaugePlus();
                 Destroy();
-            }
-            else if(type == BulletType.Beam)
-            {
-                
             }
             else
             {

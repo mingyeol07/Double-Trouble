@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 /// <summary>
 /// 합체한 플레이어
 /// </summary>
@@ -66,11 +67,11 @@ public class UnionPlayer : MonoBehaviour
 
     private IEnumerator Shield()
     {
-        GameObject go = Instantiate(shield, transform);
+        shield.SetActive(true); 
         isSheild = true;
         yield return new WaitForSeconds(3f);
         isSheild = false;
-        Destroy(go);
+        shield.SetActive(false);
     }
 
     protected virtual void FixedUpdate()

@@ -5,13 +5,11 @@ using UnityEngine;
 public class BossBarrier : MonoBehaviour
 {
     [SerializeField] private bool isLeftBarrier;
-    private bool onLeftBarrierRing;
-    private bool onRightBarrierRing;
+    [SerializeField] private EnemyBossA boss;
 
-    private void Update()
+    private void Start()
     {
-        Debug.Log(GetOnLeftBarriering());
-        Debug.Log(GetOnRightRarriering());
+        boss = GetComponentInParent<EnemyBossA>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -20,11 +18,13 @@ public class BossBarrier : MonoBehaviour
         {
             if(isLeftBarrier)
             {
-                onLeftBarrierRing = true;
+                Debug.Log("true");
+                boss.SetIsBarrieringLeft(true);
             }
             else
             {
-                onRightBarrierRing = true;
+                Debug.Log("true");
+                boss.SetIsBarrieringRight(true);
             }
         }
     }
@@ -35,22 +35,14 @@ public class BossBarrier : MonoBehaviour
         {
             if (isLeftBarrier)
             {
-                onLeftBarrierRing = false;
+                Debug.Log("False");
+                boss.SetIsBarrieringLeft(false);
             }
             else
             {
-                onRightBarrierRing = false;
+                Debug.Log("False");
+                boss.SetIsBarrieringRight(false);
             }
         }
-    }
-
-    public bool GetOnLeftBarriering()
-    {
-        return onLeftBarrierRing;
-    }
-
-    public bool GetOnRightRarriering()
-    {
-        return onRightBarrierRing;
     }
 }

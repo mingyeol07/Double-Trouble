@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 /// <summary>
 /// 플레이어 부모 클래스
 /// </summary>
@@ -132,10 +133,10 @@ public abstract class Player : MonoBehaviour
 
     private IEnumerator Shield()
     {
-        GameObject go = Instantiate(shield, transform);
+        shield.SetActive(true);
         isShield = true;
         yield return new WaitForSeconds(3f);
         isShield = false;
-        Destroy(go);
+        shield.SetActive(false);
     }
 }

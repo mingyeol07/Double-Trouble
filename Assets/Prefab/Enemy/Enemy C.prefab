@@ -238,7 +238,7 @@ MonoBehaviour:
   moveDownSpeed: 0.2
   defaultSprite: {fileID: 21300000, guid: 128d72d33b7823e4a8620fe9c40d138e, type: 3}
   destorySound: {fileID: 8300000, guid: b59b5a211cd5eda40bf1691f5e069959, type: 3}
-  shootSound: {fileID: 0}
+  shootSound: {fileID: 8300000, guid: 8329afb8135599e4fb698834e817359a, type: 3}
   beam: {fileID: 6985942264994137242}
   beamWarning: {fileID: 2318341975201299297}
 --- !u!95 &3988342557387908918
@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 6202530499690465896}
   - component: {fileID: 3547569082840216972}
   - component: {fileID: 7334359525192753415}
-  - component: {fileID: 1841262235917401370}
+  - component: {fileID: 8087083175686487546}
   m_Layer: 7
   m_Name: E_Beam
   m_TagString: EnemyBeam
@@ -386,13 +386,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6985942264994137242}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: -0, y: -12.36, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.39, y: 1.53, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6794720712045662436}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!212 &6202530499690465896
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -434,7 +434,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 0f086d69612f2e64688d950a12b606c0, type: 3}
+  m_Sprite: {fileID: -2141561534, guid: 182171b34c6b66a4ca26a6277962fd2e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -478,7 +478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 944c7b51683d3664ba10732abfd1a72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!61 &1841262235917401370
+--- !u!61 &8087083175686487546
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -514,12 +514,12 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 40.041668, y: 2.5}
+    oldSize: {x: 1.4166666, y: 14.666667}
     newSize: {x: 9.61, y: 0.6}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 40.041668, y: 2.5}
+  m_Size: {x: 1.4166666, y: 14.666667}
   m_EdgeRadius: 0

@@ -35,6 +35,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private GameObject[] unionPlayers;
     private GameObject unionpPlayer;
 
+    private bool IsCheat;
+
     private void Awake()
     {
         Instance = this;
@@ -72,8 +74,7 @@ public class PlayerManager : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.F1))
         {
-            player_L.isShield = !player_L.isShield;
-            player_R.isShield = !player_R.isShield;
+            IsCheat = !IsCheat;
         }
     }
 
@@ -84,6 +85,8 @@ public class PlayerManager : MonoBehaviour
 
     public void PlayerDestroy(int hp, bool isLeft)
     {
+        if (IsCheat) return;
+
         GameObject player;
 
         if (isLeft)

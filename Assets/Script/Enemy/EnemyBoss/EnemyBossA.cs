@@ -9,8 +9,11 @@ using UnityEngine;
 
 public class EnemyBossA : Enemy
 {
-    [SerializeField] private BossBarrier barrierLeft;
-    [SerializeField] private BossBarrier barrierRight;
+    [SerializeField] private bool isBarrieringLeft;
+    [SerializeField] private bool isBarrieringRight;
+
+    [SerializeField] private GameObject barrierLeft;
+    [SerializeField] private GameObject barrierRight;
 
     [SerializeField] private Transform[] leftShootTransform;
     [SerializeField] private Transform[] rightShootTransform;
@@ -21,6 +24,10 @@ public class EnemyBossA : Enemy
     [SerializeField] private GameObject centerBeam;
     [SerializeField] private GameObject areaBeam;
 
+    [SerializeField] private GameObject item;
+
+    [SerializeField] private int testRandomIndex;
+
     private void Start()
     {
         StartCoroutine(Co_Shoot());
@@ -28,10 +35,22 @@ public class EnemyBossA : Enemy
 
     protected IEnumerator Co_Shoot()
     {
+        yield return new WaitForSeconds(3f);
         Shoot();
-        yield return null;
     }
 
+    protected override void Update()
+    {
+        base.Update();
+        if (isBarrieringLeft && isBarrieringRight)
+        {
+            areaBeam.GetComponent<BoxCollider2D>().enabled = false;
+        }
+        else
+        {
+            areaBeam.GetComponent<BoxCollider2D>().enabled = true;
+        }
+    }
 
     protected override void Shoot()
     {
@@ -40,29 +59,35 @@ public class EnemyBossA : Enemy
 
     private IEnumerator RandomPattern()
     {
-        int ranNum = Random.Range(0, 3);
+        int ranNum;
+        if (testRandomIndex == 0) ranNum = Random.Range(0, 4);
+        else ranNum = testRandomIndex;
+
+        float waitTime = 3f;
 
         switch (ranNum)
         {
             case 0:
                 StartCoroutine(CircleShoot());
-                yield return new WaitForSeconds(3f);
-                Shoot();
+                waitTime = 2f;
                 break;
             case 1:
                 StartCoroutine(LeftShoot());
                 StartCoroutine(RightShoot());
-                yield return new WaitForSeconds(3f);
-                Shoot();
+                waitTime = 1f;
                 break;
             case 2:
                 StartCoroutine(LazerShoot());
-                yield return new WaitForSeconds(3f);
-                Shoot();
+                waitTime = 2f;
+                break;
+            case 3:
+                StartCoroutine(BarrierPattern());
+                waitTime = 3f;
                 break;
         }
 
-        yield return null;
+        yield return new WaitForSeconds(waitTime);
+        Shoot();
     }
 
     private IEnumerator LazerShoot()
@@ -70,7 +95,7 @@ public class EnemyBossA : Enemy
         centerBeamWarning.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         centerBeamWarning.SetActive(false);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         centerBeam.SetActive(true);
         yield return new WaitForSeconds(1f);
         centerBeam.SetActive(false);
@@ -111,24 +136,31 @@ public class EnemyBossA : Enemy
         }
     }
 
+    public void SetIsBarrieringLeft(bool _bool)
+    {
+        isBarrieringLeft = _bool;
+    }
+
+    public void SetIsBarrieringRight(bool _bool)
+    {
+        isBarrieringRight = _bool;
+    }
+
     private IEnumerator BarrierPattern()
     {
-        barrierLeft.gameObject.SetActive(true);
-        barrierRight.gameObject.SetActive(true);
+        barrierLeft.SetActive(true);
+        barrierRight.SetActive(true);
 
         areaBeamWarning.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         areaBeamWarning.SetActive(false);
-        yield return new WaitForSeconds(2.5f);
-        areaBeam.SetActive(true);
-        if (!barrierLeft.GetOnLeftBarriering() || !barrierRight.GetOnRightRarriering())
-        {
-            PlayerManager.Instance.player_L.HpDown();
-            PlayerManager.Instance.player_R.HpDown();
-        }
         yield return new WaitForSeconds(1f);
-        barrierLeft.gameObject.SetActive(false);
-        barrierRight.gameObject.SetActive(false);
+
+        areaBeam.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+        barrierLeft.SetActive(false);
+        barrierRight.SetActive(false);
 
         areaBeam.SetActive(false);
     }
