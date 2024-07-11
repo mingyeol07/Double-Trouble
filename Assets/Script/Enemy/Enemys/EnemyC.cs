@@ -30,6 +30,13 @@ public class EnemyC : Enemy
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, angle - 90), Time.deltaTime * rotationSpeed);
     }
 
+    protected override IEnumerator Co_StartMove(float moveTime, Vector2 startPosition, Vector2 endPosition)
+    {
+        isBeam = false;
+        beamWarning.SetActive(false);
+        return base.Co_StartMove(moveTime, startPosition, endPosition);
+    }
+
     protected override void Shoot()
     {
         StartCoroutine(ShootBeam());
@@ -51,10 +58,5 @@ public class EnemyC : Enemy
         yield return new WaitForSeconds(1f);
 
         isBeam = false;
-    }
-
-    private IEnumerator BeamWarning()
-    {
-        yield return null;
     }
 }

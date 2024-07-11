@@ -1,19 +1,40 @@
 // # Systems
 using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-
 
 // # Unity
 using UnityEngine;
 
 public class EnemyG : Enemy
 {
+    float angle;
+    private readonly float rotationSpeed = 6f;
     private Vector3[] poses = new Vector3[4];
 
     protected override void Shoot()
     {
         return;
+    }
+
+    public void CustomBezierVecs(Vector3 a, Vector3 b, Vector3 c, Vector3 d, float moveTime)
+    {
+        StartCoroutine(Co_StartMove(moveTime, a, d));
+
+        poses[0] = a;
+        poses[1] = b;
+        poses[2] = c;
+        poses[3] = d;
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        LookAtPlayer();
+    }
+
+    private void LookAtPlayer()
+    {
+        angle = PlayerManager.Instance.GetLookNearPlayerAngle(transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, angle - 90), Time.deltaTime * rotationSpeed);
     }
 
     protected override IEnumerator Co_StartMove(float moveTime, Vector2 startPosition, Vector2 endPosition)
@@ -33,6 +54,7 @@ public class EnemyG : Enemy
             yield return null;
         }
 
+        StartCoroutine(Co_Destroy());
         transform.position = endPosition;  // 이동이 끝나면 정확한 목표 위치로 설정
     }
 

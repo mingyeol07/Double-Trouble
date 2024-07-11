@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 /// <summary>
 /// 플레이어에 관련된 모든 것을 관리하는 매니저 (합체, 스타트, 게임오버 등)
@@ -34,7 +35,6 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private GameObject[] playerHpImage_R;
     [SerializeField] private GameObject[] unionPlayers;
     private GameObject unionpPlayer;
-
     private bool IsCheat;
 
     private void Awake()
@@ -80,7 +80,26 @@ public class PlayerManager : MonoBehaviour
 
     public void Stage1Clear()
     {
+        StartCoroutine(NextStage());
+    }
+
+    public void Stage2Clear()
+    {
+        StartCoroutine(GameClear());
+    }
+
+    private IEnumerator NextStage()
+    {
         txt_Clear.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("Stage1");
+    }
+
+    private IEnumerator GameClear()
+    {
+        txt_Clear.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        pnl_GameClear.SetActive(true);
     }
 
     public void PlayerDestroy(int hp, bool isLeft)
@@ -242,11 +261,14 @@ public class PlayerManager : MonoBehaviour
 
     public void Union()
     {
-        SetActivePlayers(false);
-        int randomIndex = Random.Range(0, 4);
-        Debug.Log(randomIndex);
-        GameObject randomUnionPlayer = Instantiate(unionPlayers[randomIndex]);
-        randomUnionPlayer.transform.position = player_L_Transform.position;
+        if(player_L.gameObject.activeSelf && player_R.gameObject.activeSelf)
+        {
+            SetActivePlayers(false);
+            int randomIndex = Random.Range(0, 4);
+            Debug.Log(randomIndex);
+            GameObject randomUnionPlayer = Instantiate(unionPlayers[randomIndex]);
+            randomUnionPlayer.transform.position = player_L_Transform.position;
+        }
     }
 
     public void SetLeftPlayerGaugePlus()
@@ -254,7 +276,7 @@ public class PlayerManager : MonoBehaviour
         if(player_L.gameObject.activeSelf)
         {
             L_Gauge++;
-            image_L_Gauge.fillAmount = L_Gauge / maxGauge;
+            image_L_Gauge.fillAmount = (float)L_Gauge / maxGauge;
         }
     }
 
@@ -263,7 +285,7 @@ public class PlayerManager : MonoBehaviour
         if (player_R.gameObject.activeSelf)
         {
             R_Gauge++;
-            image_R_Gauge.fillAmount = R_Gauge / maxGauge;
+            image_R_Gauge.fillAmount = (float)R_Gauge / maxGauge;
         }
     }
 }

@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Timeline;
 using UnityEngine;
 /// <summary>
 /// ÇÃ·¹ÀÌ¾î°¡ ½î´Â ºö

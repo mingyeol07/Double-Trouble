@@ -37,7 +37,7 @@ public class TitleManager : MonoBehaviour
 
     private void StartGame()
     {
-        SceneManager.LoadScene("InGame");
+        SceneManager.LoadScene("Stage0");
     }
     private void Exit()
     {

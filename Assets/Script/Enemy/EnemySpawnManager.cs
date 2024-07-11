@@ -16,6 +16,8 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] private GameObject bossA;
     [SerializeField] private GameObject bossB;
 
+    [SerializeField] private Animator pnl_warning;
+
     private void Start()
     {
         backGroundManager = GetComponent<StageBackGroundManager>();
@@ -57,10 +59,12 @@ public class EnemySpawnManager : MonoBehaviour
         if (spawnData.enemyType == EnemyType.EnemyBossA)
         {
             enemy = Instantiate(bossA);
+            pnl_warning.SetTrigger("Warning");
         }
         else if(spawnData.enemyType == EnemyType.EnemyBossB)
         {
             enemy = Instantiate(bossB);
+            pnl_warning.SetTrigger("Warning");
         }
         else
         {

@@ -15,6 +15,8 @@ public class EnemyF : Enemy
 
     protected override IEnumerator Co_StartMove(float moveTime, Vector2 startPosition, Vector2 endPosition)
     {
+        beamWarning.SetActive(false);
+
         Vector2 direction = (startPosition - endPosition).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle - 90);
