@@ -1,6 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -37,6 +36,13 @@ public class PlayerManager : MonoBehaviour
     private GameObject unionpPlayer;
     private bool IsCheat;
 
+    [SerializeField] private Image pnl_fade;
+
+    [SerializeField] private TMP_Text txt_score;
+    [SerializeField] private TMP_Text txt_score2;
+    [SerializeField] private TMP_Text txt_score3;
+    private int score;
+
     private void Awake()
     {
         Instance = this;
@@ -47,6 +53,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(fadeIn());
         player_L.GetComponent<Animator>().SetTrigger("Start");
         player_R.GetComponent<Animator>().SetTrigger("Start");
         StartCoroutine(LeadyStart());
@@ -76,6 +83,15 @@ public class PlayerManager : MonoBehaviour
         {
             IsCheat = !IsCheat;
         }
+
+        txt_score.text = score.ToString();
+        txt_score3.text = score.ToString();
+        txt_score2.text = score.ToString();
+    }
+
+    public void ScoreUp(int upScale)
+    {
+        score += upScale;
     }
 
     public void Stage1Clear()
@@ -88,10 +104,42 @@ public class PlayerManager : MonoBehaviour
         StartCoroutine(GameClear());
     }
 
+    private IEnumerator fadeIn()
+    {
+        float time = 0;
+        float fadeDuration = 2;
+
+        // 페이드 인 (알파 값 감소)
+        time = 0;
+        while (time < fadeDuration)
+        {
+            time += Time.deltaTime;
+            float alpha = Mathf.Lerp(1, 0, time / fadeDuration);
+            pnl_fade.color = new Color(0, 0, 0, alpha);
+            yield return null;
+        }
+    }
+
     private IEnumerator NextStage()
     {
         txt_Clear.SetActive(true);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
+
+        // 페이드 아웃 (알파 값 증가)
+        float fadeDuration = 2f;
+        float time = 0;
+        while (time < fadeDuration)
+        {
+            time += Time.deltaTime;
+            float alpha = Mathf.Lerp(0, 1, time / fadeDuration);
+            pnl_fade.color = new Color(0, 0, 0, alpha);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(2f);
+
+        
+
         SceneManager.LoadScene("Stage1");
     }
 

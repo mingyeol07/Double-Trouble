@@ -22,6 +22,8 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] private AudioClip destorySound;
     [SerializeField] private AudioClip shootSound;
 
+    [SerializeField] private int scoreUpScale;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -86,6 +88,7 @@ public abstract class Enemy : MonoBehaviour
         collider.enabled = false;
         onMoveDown = false;
         DropItem();
+        PlayerManager.Instance.ScoreUp(scoreUpScale);
         yield return null;  
     }
 

@@ -302,4 +302,5 @@ MonoBehaviour:
   defaultSprite: {fileID: 21300000, guid: 167e20ff1f1a4734c86f7a88b823d40d, type: 3}
   destorySound: {fileID: 8300000, guid: b59b5a211cd5eda40bf1691f5e069959, type: 3}
   shootSound: {fileID: 8300000, guid: 8329afb8135599e4fb698834e817359a, type: 3}
+  scoreUpScale: 300
   shootTransform: {fileID: 3411376092904241270}

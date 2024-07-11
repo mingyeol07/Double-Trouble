@@ -375,7 +375,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4, y: 4}
+    oldSize: {x: 3.2, y: 3.2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -521,5 +521,6 @@ MonoBehaviour:
   defaultSprite: {fileID: 21300000, guid: 282ad78c4feb4694ea8126e593c7a190, type: 3}
   destorySound: {fileID: 8300000, guid: b59b5a211cd5eda40bf1691f5e069959, type: 3}
   shootSound: {fileID: 8300000, guid: 8329afb8135599e4fb698834e817359a, type: 3}
+  scoreUpScale: 200
   beam: {fileID: 6351349014484612579}
   beamWarning: {fileID: 6758051235358879954}

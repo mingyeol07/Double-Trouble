@@ -33,6 +33,7 @@ public class EnemyC : Enemy
     protected override IEnumerator Co_StartMove(float moveTime, Vector2 startPosition, Vector2 endPosition)
     {
         isBeam = false;
+        beam.SetActive(false);
         beamWarning.SetActive(false);
         return base.Co_StartMove(moveTime, startPosition, endPosition);
     }
