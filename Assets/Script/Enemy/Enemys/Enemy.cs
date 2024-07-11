@@ -56,7 +56,7 @@ public abstract class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            HpDown(collision.gameObject.GetComponent<Bullet>().GetDamage());
+            HpDown(collision.gameObject.GetComponent<Bullet>().GetDamage(), true);
         }
         else if (collision.gameObject.CompareTag("Beam"))
         {
@@ -69,10 +69,14 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    private void HpDown(int damage)
+    private void HpDown(int damage, bool isPlayerHit = false)
     {
+
         if ((curHp - damage) <= 0)
+        {
             StartCoroutine(Co_Destroy());
+            if(isPlayerHit) PlayerManager.Instance.ScoreUp(scoreUpScale);
+        } 
         else
         {
             curHp -= damage;
@@ -88,7 +92,6 @@ public abstract class Enemy : MonoBehaviour
         collider.enabled = false;
         onMoveDown = false;
         DropItem();
-        PlayerManager.Instance.ScoreUp(scoreUpScale);
         yield return null;  
     }
 

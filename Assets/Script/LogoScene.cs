@@ -12,7 +12,7 @@ public class LogoScene : MonoBehaviour
 
     private  IEnumerator Co_TitleScene()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
 
         SceneManager.LoadScene("Title");
     }

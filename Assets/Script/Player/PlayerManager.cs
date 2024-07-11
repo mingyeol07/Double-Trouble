@@ -41,7 +41,10 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private TMP_Text txt_score;
     [SerializeField] private TMP_Text txt_score2;
     [SerializeField] private TMP_Text txt_score3;
+
     private int score;
+
+    private int randomIndex = 5;
 
     private void Awake()
     {
@@ -82,6 +85,27 @@ public class PlayerManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.F1))
         {
             IsCheat = !IsCheat;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            randomIndex = 0;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            randomIndex = 1;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            randomIndex = 2;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            randomIndex = 3;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            randomIndex = 4;
         }
 
         txt_score.text = score.ToString();
@@ -311,10 +335,13 @@ public class PlayerManager : MonoBehaviour
     {
         if(player_L.gameObject.activeSelf && player_R.gameObject.activeSelf)
         {
+            int ran;
             SetActivePlayers(false);
-            int randomIndex = Random.Range(0, 4);
-            Debug.Log(randomIndex);
-            GameObject randomUnionPlayer = Instantiate(unionPlayers[randomIndex]);
+
+            if (randomIndex == 5) ran = Random.Range(0, 4);
+            else ran = randomIndex;
+            
+            GameObject randomUnionPlayer = Instantiate(unionPlayers[ran]);
             randomUnionPlayer.transform.position = player_L_Transform.position;
         }
     }

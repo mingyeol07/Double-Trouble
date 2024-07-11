@@ -119,4 +119,18 @@ public class EnemyBossA : Enemy
         PlayerManager.Instance.Stage1Clear();
         yield return null;
     }
+
+    protected override IEnumerator Co_StartMove(float moveTime, Vector2 startPosition, Vector2 endPosition)
+    {
+        Vector2 velocity = Vector2.zero;
+        float offset = 0.2f;
+
+        transform.position = startPosition;
+
+        while (Vector2.Distance((Vector2)transform.position, endPosition) > offset)
+        {
+            transform.position = Vector2.SmoothDamp(transform.position, endPosition, ref velocity, moveTime);
+            yield return null;
+        }
+    }
 }
