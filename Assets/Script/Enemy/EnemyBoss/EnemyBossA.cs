@@ -41,7 +41,7 @@ public class EnemyBossA : Enemy
     private IEnumerator RandomPattern()
     {
         int ranNum;
-        if (testRandomIndex == 0) ranNum = Random.Range(0, 3);
+        if (testRandomIndex == 0) ranNum = Random.Range(0, 4);
         else ranNum = testRandomIndex;
 
         float waitTime = 3f;
@@ -61,10 +61,25 @@ public class EnemyBossA : Enemy
                 StartCoroutine(LazerShoot());
                 waitTime = 2f;
                 break;
+            case 3:
+                StartCoroutine(SpawnEnemy());
+                waitTime = 1f;
+                break;
         }
 
         yield return new WaitForSeconds(waitTime);
         Shoot();
+    }
+
+    private IEnumerator SpawnEnemy()
+    {
+        GameObject enemy1 =  EnemyPoolManager.Instance.Spawn(EnemyType.EnemyA);
+        GameObject enemy2 = EnemyPoolManager.Instance.Spawn(EnemyType.EnemyA);
+
+        enemy1.GetComponent<Enemy>().StartMove(3f, new Vector2(-6, 2), new Vector2(-6, -2));
+        enemy2.GetComponent<Enemy>().StartMove(3f, new Vector2(6, 2), new Vector2(6, -2));
+
+        yield return null;
     }
 
     private IEnumerator LazerShoot()

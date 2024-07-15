@@ -1242,9 +1242,9 @@ MonoBehaviour:
   - {fileID: 2085542279291350868, guid: 92be72b82cc3fd1498008dba003b0172, type: 3}
   - {fileID: 1194616031614353750, guid: f942beb3d7915b447a9494ba322b2b8a, type: 3}
   pnl_fade: {fileID: 18256939}
-  txt_score: {fileID: 1240740228}
-  txt_score2: {fileID: 1661286878}
-  txt_score3: {fileID: 1979700373}
+  txt_score: {fileID: 1979700373}
+  txt_score2: {fileID: 1240740228}
+  txt_score3: {fileID: 1661286878}
 --- !u!4 &193925001
 Transform:
   m_ObjectHideFlags: 0
@@ -6056,7 +6056,7 @@ MonoBehaviour:
   m_IsGlobal: 1
   priority: 0
   blendDistance: 0
-  weight: 0.5
+  weight: 0.3
   sharedProfile: {fileID: 11400000, guid: 60992428aa59b524896cd0b7859f9c2a, type: 2}
 --- !u!4 &1065323106
 Transform:

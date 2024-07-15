@@ -109,8 +109,8 @@ public class PlayerManager : MonoBehaviour
         }
 
         txt_score.text = score.ToString();
-        txt_score3.text = score.ToString();
-        txt_score2.text = score.ToString();
+        txt_score3.text = "SCORE: " + score.ToString();
+        txt_score2.text = "SCORE: " + score.ToString();
     }
 
     public void ScoreUp(int upScale)
@@ -146,6 +146,7 @@ public class PlayerManager : MonoBehaviour
 
     private IEnumerator NextStage()
     {
+        isPlay = false;
         txt_Clear.SetActive(true);
         yield return new WaitForSeconds(1f);
 
@@ -169,6 +170,7 @@ public class PlayerManager : MonoBehaviour
 
     private IEnumerator GameClear()
     {
+        isPlay = false;
         txt_Clear.SetActive(true);
         yield return new WaitForSeconds(3f);
         pnl_GameClear.SetActive(true);
