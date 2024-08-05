@@ -44,7 +44,7 @@ public class PlayerManager : MonoBehaviour
 
     private int score;
 
-    private int randomIndex = 5;
+    private int randomIndex = 4;
 
     private void Awake()
     {
@@ -340,7 +340,7 @@ public class PlayerManager : MonoBehaviour
             int ran;
             SetActivePlayers(false);
 
-            if (randomIndex == 5) ran = Random.Range(0, 4);
+            if (randomIndex == 4) ran = Random.Range(0, 4);
             else ran = randomIndex;
             
             GameObject randomUnionPlayer = Instantiate(unionPlayers[ran]);
